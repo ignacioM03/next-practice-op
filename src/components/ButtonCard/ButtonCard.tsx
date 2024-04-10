@@ -1,11 +1,23 @@
+import { usePetStore } from "@/store/petStore";
 import React from "react";
 
-export const ButtonCard = () => {
+interface ButtonProps {
+  id: number;
+}
+
+export const ButtonCard = ({ id }: ButtonProps) => {
+  const { removePet } = usePetStore();
+
+  const handleDelete = (id: number) => {
+    removePet(id);
+  };
+  const handleEdit = () => {};
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
       <button
         className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative"
-        title="Edit Product"
+        title="Edit pet"
+        onClick={() => handleDelete(id)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +37,8 @@ export const ButtonCard = () => {
 
       <button
         className="inline-block p-3 text-gray-700 hover:bg-gray-50 focus:relative"
-        title="Delete Product"
+        title="Delete pet"
+        onClick={() => handleDelete(id)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
