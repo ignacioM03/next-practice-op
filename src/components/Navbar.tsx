@@ -26,24 +26,10 @@ export default function Navbar() {
             <nav aria-label="Global" className="hidden md:block">
               <ul className="flex items-center gap-6 text-sm">
                 <Link
-                  href="/pets"
+                  href="/gallery"
                   className="text-gray-500 transition hover:text-gray-500/75"
                 >
-                  Pets
-                </Link>
-
-                <Link
-                  href="/pets"
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                >
-                  Pets
-                </Link>
-
-                <Link
-                  href="/pets"
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                >
-                  Pets
+                  Gallery
                 </Link>
               </ul>
             </nav>
