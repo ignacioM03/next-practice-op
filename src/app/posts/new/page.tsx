@@ -1,12 +1,12 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { PostType } from "@/types/PostType";
 import { useState } from "react";
 
 export default function NewPostPage() {
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<PostType | null>(null);
   const { user } = useAuth();
-  console.log(user);
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const res = await fetch("http://localhost:3000/api/posts", {
@@ -17,6 +17,7 @@ export default function NewPostPage() {
       body: JSON.stringify({
         title: e.target.title.value,
         body: e.target.body.value,
+        userId: user?.id,
       }),
     });
   };
@@ -105,7 +106,7 @@ export default function NewPostPage() {
         <div className="flex items-center justify-between">
           <button
             type="submit"
-            className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+            className="inline-block rounded-lg bg-teal-500 px-5 py-3 text-sm font-medium text-white"
           >
             Crear post
           </button>
