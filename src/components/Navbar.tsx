@@ -20,20 +20,6 @@ export default function Navbar() {
                 >
                   Pets
                 </Link>
-
-                <Link
-                  href="/pets"
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                >
-                  Pets
-                </Link>
-
-                <Link
-                  href="/pets"
-                  className="text-gray-500 transition hover:text-gray-500/75"
-                >
-                  Pets
-                </Link>
               </ul>
             </nav>
 
