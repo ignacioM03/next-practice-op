@@ -40,13 +40,12 @@ export default function Navbar() {
 
               <div className="flex items-center gap-4">
                 <div className="sm:flex sm:gap-4">
-                  
                   <button
-                      className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
-                      onClick={() => logout()}
-                    >
-                      Registro
-                    </button>
+                    className="rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600"
+                    onClick={() => logout()}
+                  >
+                    Logout
+                  </button>
                 </div>
                 <div className="block md:hidden">
                   <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
@@ -97,12 +96,12 @@ export default function Navbar() {
                   </Link>
 
                   <div className="hidden sm:flex">
-                  <Link
-                    className="rounded-md px-5 py-2.5 text-sm font-medium text-teal-600 shadow"
-                    href="/register"
-                  >
-                    Registro
-                  </Link>
+                    <Link
+                      className="rounded-md px-5 py-2.5 text-sm font-medium text-teal-600 shadow"
+                      href="/register"
+                    >
+                      Registro
+                    </Link>
                   </div>
                 </div>
 

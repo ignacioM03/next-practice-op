@@ -16,7 +16,7 @@ export default function LoginPage() {
     router.push("/products");
   };
   return (
-    <div className="flex justify-end">
+    <div className="flex justify-end ">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mt-9">
         <div className="mx-auto max-w-lg">
           <h1 className="text-center text-2xl font-bold text-teal-600 sm:text-3xl">

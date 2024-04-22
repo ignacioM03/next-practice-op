@@ -1,5 +1,6 @@
 "use client";
 
+import { StoreHero } from "@/components/StoreHero/StoreHero";
 import { useProductStore } from "@/store/Products";
 
 export default function Home() {
