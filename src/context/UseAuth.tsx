@@ -36,19 +36,16 @@ export const AuthProvider = ({ children }: Props) => {
 
   const login = async (user: LoginType) => {
     try {
-      const res = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
-
+      const res = await fetch(
+        `https://jsonplaceholder.typicode.com/users?email=${user.username}`
+      );
       const data = await res.json();
-      setUser(data.user);
-      setIsAuthenticated(true);
+      if (data.length > 0) {
+        setUser(data[0]);
+        setIsAuthenticated(true);
+      }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -65,7 +62,7 @@ export const AuthProvider = ({ children }: Props) => {
       setUser(data.user);
       setIsAuthenticated(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

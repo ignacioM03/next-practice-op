@@ -1,4 +1,4 @@
 export interface LoginType {
-  email: string;
+  username: string;
   password: string;
 }
