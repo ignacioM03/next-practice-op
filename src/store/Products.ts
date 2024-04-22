@@ -3,6 +3,7 @@ import { Product } from "@/types/ProductType";
 
 interface State {
   products: Product[];
+  addProduct: (product: Product) => void;
   loading: boolean;
   error: string | null;
 }

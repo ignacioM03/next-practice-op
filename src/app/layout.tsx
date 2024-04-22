@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
-import { NextUIProvider } from "@nextui-org/react";
+import {NextUIProvider} from "@nextui-org/react";
 import { AuthProvider } from "@/context/UseAuth";
+import { Footer } from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <AuthProvider>
             <Navbar />
             <main className="container">{children}</main>
+            <Footer />
           </AuthProvider>
         </NextUIProvider>
       </body>

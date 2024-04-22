@@ -2,9 +2,18 @@
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function ProductsPage() {
   const products = useProductStore((state) => state.products);
+  const addToCart = useProductStore((state) => state.addProduct);
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    products.some((product: Product) => product.id === 1)
+      ? setDisabled(true)
+      : setDisabled(false);
+  }, [products]);
   return (
     <div className="flex justify-end">
       <section className="">
@@ -103,6 +112,13 @@ export default function ProductsPage() {
                           {product.price}{" "}
                         </span>
                       </p>
+                      <button
+                        className="bg-teal-700 hover:bg-white-700 text-white font-bold py-2 px-4 rounded"
+                        onClick={() => addToCart(product)}
+                        disabled={disabled}
+                      >
+                        agregar
+                      </button>
                     </div>
                   </Link>
                 </li>
