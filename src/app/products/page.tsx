@@ -1,8 +1,7 @@
 "use client";
-
 import { useProductStore } from "@/store/Products";
 
-export default function Home() {
+export default function ProductsPage() {
   const products = useProductStore((state) => state.products);
   return (
     <div className="flex justify-end">
