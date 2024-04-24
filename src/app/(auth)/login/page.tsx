@@ -23,13 +23,13 @@ export default function LoginPage() {
             Iniciar Sesion
           </h1>
 
-          <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
+          <p className="mx-auto mt-4 max-w-md text-center text-gray-500 mb-8">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati
             sunt dolores deleniti inventore quaerat mollitia?
           </p>
 
           <form
-            className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
+            className="mb-0 mt-8 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
             onSubmit={handleSubmit}
           >
             <p className="text-center text-lg font-medium">
@@ -120,7 +120,7 @@ export default function LoginPage() {
             <p className="text-center text-sm text-gray-500">
               No tienes cuenta?
               <Link className="underline" href="/register">
-                Registro
+                Registrate
               </Link>
             </p>
           </form>

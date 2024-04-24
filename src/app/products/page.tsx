@@ -1,4 +1,5 @@
 "use client";
+import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
 import Link from "next/link";
@@ -15,7 +16,7 @@ export default function ProductsPage() {
       : setDisabled(false);
   }, [products]);
   return (
-    <div className="flex justify-end">
+    <div className="container flex justify-end">
       <section className="">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
@@ -88,43 +89,10 @@ export default function ProductsPage() {
           <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {products.length > 0 ? (
               products.map((product: Product) => (
-                <li key={product.id}>
-                  <Link
-                    href={`/products/${product.id}`}
-                    className="group block overflow-hidden"
-                  >
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-                    />
-
-                    <div className="relative bg-white pt-3">
-                      <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-                        {product.title}
-                      </h3>
-
-                      <p className="mt-2">
-                        <span className="sr-only"> Regular Price </span>
-
-                        <span className="tracking-wider text-gray-900">
-                          {" "}
-                          {product.price}{" "}
-                        </span>
-                      </p>
-                      <button
-                        className="bg-teal-700 hover:bg-white-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => addToCart(product)}
-                        disabled={disabled}
-                      >
-                        agregar
-                      </button>
-                    </div>
-                  </Link>
-                </li>
+                <ProductCard key={product.id} product={product} />
               ))
             ) : (
-              <p>No products found</p>
+              <p className="font-bold text-4xl ">No products found</p>
             )}
           </ul>
         </div>

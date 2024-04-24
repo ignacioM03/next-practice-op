@@ -10,8 +10,8 @@ export const StoreHero = () => {
       <main>
         <header className="store-hero">
           <Spacer y={2} />
-          <Card shadow>
-            <Card.Body>
+          <Card shadow="sm">
+            <Card>
               <Text h1 color="primary" gradient>
                 Welcome to NextUI + Next.js Shopping app
               </Text>
@@ -19,7 +19,7 @@ export const StoreHero = () => {
                 This is a simple shopping app built with NextUI and Next.js.
                 This is a demo app to showcase NextUI components.
               </Text>
-            </Card.Body>
+            </Card>
           </Card>
         </header>
       </main>

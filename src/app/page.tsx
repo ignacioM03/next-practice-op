@@ -6,7 +6,7 @@ import { useProductStore } from "@/store/Products";
 export default function Home() {
   const products = useProductStore((state) => state.products);
   return (
-    <div className="flex justify-end">
+    <div className="container flex justify-end">
       <section className="">
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>

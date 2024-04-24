@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function CartPage() {
   return (
     <div className="flex  justify-center mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -13,10 +15,12 @@ export default function CartPage() {
             <div className="mt-8">
               <ul className="space-y-4">
                 <li className="flex items-center gap-4">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80"
                     alt=""
                     className="size-16 rounded object-cover"
+                    width={64}
+                    height={64}
                   />
 
                   <div>
