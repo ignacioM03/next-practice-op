@@ -1,14 +1,28 @@
 "use client";
 
+import { useProductStore } from "@/store/Products";
+import { Product } from "@/types/ProductType";
+
 export default function NewProductPage() {
+  const addProduct = useProductStore((state) => state.addProduct);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    const product: Product = {
+      title: e.target.title.value || "",
+      image: e.target.image.value  || "",
+      price: e.target.price.value || "",
+      quantity: e.target.quantity.value || "",
+      description: e.target.description.value || "",
+      category: "",
+      id: Date.now(),
+    };
+    addProduct(product);
   };
   return (
-    <div className="">
+    <div className="container mx-auto">
       <section className="bg-gray-100">
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-6">
+          <div className="grid mx-auto  lg:grid-cols-6">
             <div className="rounded-lg bg-white p-8 shadow-lg lg:col-span-3 lg:p-12">
               <form action="#" className="space-y-4" onSubmit={handleSubmit}>
                 <div>
@@ -45,6 +59,17 @@ export default function NewProductPage() {
                       placeholder="Cantidad"
                       type="number"
                       id="quantity"
+                    />
+                  </div>
+                  <div>
+                    <label className="sr-only" htmlFor="price">
+                      Precio del producto
+                    </label>
+                    <input
+                      className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                      placeholder="Precio del producto"
+                      type="text"
+                      id="price"
                     />
                   </div>
                 </div>
@@ -121,7 +146,7 @@ export default function NewProductPage() {
                 <div className="mt-4">
                   <button
                     type="submit"
-                    className="inline-block w-full rounded-lg bg-black px-5 py-3 font-medium text-white sm:w-auto"
+                    className="inline-block w-full rounded-lg bg-teal-600 px-5 py-3 font-medium text-white sm:w-auto"
                   >
                     Agregar producto
                   </button>

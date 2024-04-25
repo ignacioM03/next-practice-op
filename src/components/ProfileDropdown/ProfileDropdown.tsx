@@ -8,6 +8,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type ProfileProps = {
   user: UserType | null;
@@ -15,6 +16,7 @@ type ProfileProps = {
 };
 
 export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
+  const router = useRouter();
   return user!.role === "user" ? (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-start">
@@ -69,7 +71,14 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
           <DropdownItem key="addProduct">
             <Link href={"/products/new"}>Agregar productos</Link>
           </DropdownItem>
-          <DropdownItem key="logout" color="danger" onClick={logout}>
+          <DropdownItem
+            key="logout"
+            color="danger"
+            onClick={() => {
+              logout();
+              router.push("/login");
+            }}
+          >
             Log Out
           </DropdownItem>
         </DropdownMenu>

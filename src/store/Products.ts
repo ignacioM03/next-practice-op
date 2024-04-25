@@ -18,6 +18,7 @@ export const useProductStore = create<State>((set) => ({
       category: "summer",
       image:
         "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+      quantity: 1,
     },
     {
       id: 3,
@@ -27,6 +28,7 @@ export const useProductStore = create<State>((set) => ({
       category: "winter",
       image:
         "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+      quantity: 3,
     },
     {
       id: 1,
@@ -36,6 +38,7 @@ export const useProductStore = create<State>((set) => ({
       category: "summer",
       image:
         "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+      quantity: 4,
     },
     {
       id: 4,
@@ -45,6 +48,7 @@ export const useProductStore = create<State>((set) => ({
       category: "winter",
       image:
         "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+      quantity: 5,
     },
   ],
   loading: false,
@@ -65,4 +69,5 @@ export const useProductStore = create<State>((set) => ({
       ),
     })),
   clearProducts: () => set({ products: [] }),
+  
 }));

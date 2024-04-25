@@ -3,10 +3,13 @@ import { useAuth } from "@/context/UseAuth";
 import Link from "next/link";
 import { ProfileDropdown } from "../ProfileDropdown/ProfileDropdown";
 import { useProductStore } from "@/store/Products";
+import { Role } from "@/types/Role";
+import { useCartStore } from "@/store/CartStore";
 
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
   const products = useProductStore((state) => state.products);
+  const items = useCartStore((state) => state.items);
   return (
     <header className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -26,15 +29,24 @@ export default function Navbar() {
                   >
                     Productos
                   </Link>
-                  <Link
-                    href="/faqs"
-                    className="text-gray-500 transition hover:text-gray-500/75"
-                  >
-                    Faqs
-                  </Link>
+                  {user?.role === Role.ADMIN ? (
+                    <Link
+                      href="/dashboard"
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                    >
+                      Dashoboard
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/faqs"
+                      className="text-gray-500 transition hover:text-gray-500/75"
+                    >
+                      Faqs
+                    </Link>
+                  )}
                   <Link
                     href="/products/cart"
-                    className="text-gray-500 transition hover:text-gray-500/75"
+                    className="flex justify-between ext-gray-500 transition hover:text-gray-500/75"
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -42,6 +54,7 @@ export default function Navbar() {
                       xmlns="http://www.w3.org/2000/svg"
                       width={24}
                       height={24}
+                      strokeWidth={2}
                       className="text-gray-500 transition hover:text-gray-500/75"
                     >
                       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
@@ -76,6 +89,7 @@ export default function Navbar() {
                         ></path>{" "}
                       </g>
                     </svg>
+                    {items.length}
                   </Link>
                 </ul>
               </nav>

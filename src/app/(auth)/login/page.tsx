@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/context/UseAuth";
+import { Role } from "@/types/Role";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,8 +13,15 @@ export default function LoginPage() {
   const { login } = useAuth();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = login({ username: email, password });
-    router.push("/products");
+    const res = await login({ username: email, password });
+    const user = {
+      ...(res || {}), // Ensure that res is an object before spreading it
+      role: Role.ADMIN,
+    };
+
+    user.role === Role.ADMIN
+      ? router.push("/dashboard")
+      : router.push("/products");
   };
   return (
     <div className="flex justify-end ">

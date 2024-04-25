@@ -1,6 +1,6 @@
 export default function FaqsPage() {
   return (
-    <div className="container flex justify-center">
+    <div className="container mx-auto max-w-7xl my-8">
       <div className="divide-y divide-gray-100 rounded-xl border border-gray-100 bg-white">
         <details
           className="group p-6 [&_summary::-webkit-details-marker]:hidden"
