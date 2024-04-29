@@ -5,8 +5,16 @@ import Image from "next/image";
 type ItemCardProps = {
   item: Product;
 };
+
+const inputChangedHandler = (event: any) => {
+  const updatedKeyword = event.target.value;
+  // May be call for search result
+  
+};
+
 export const ItemCard = ({ item }: ItemCardProps) => {
   const removeItem = useCartStore((state) => state.removeItem);
+  const {} = useCartStore((state) => state);
   return (
     <li className="flex items-center gap-4">
       <Image
@@ -16,45 +24,38 @@ export const ItemCard = ({ item }: ItemCardProps) => {
         width={64}
         height={64}
       />
-
       <div>
         <h3 className="text-sm text-gray-900">{item.title}</h3>
-
         <dl className="mt-0.5 space-y-px text-[10px] text-gray-600">
           <div>
-            <dt className="inline">Size:</dt>
-            <dd className="inline">XXS</dd>
-          </div>
-
-          <div>
-            <dt className="inline">Color:</dt>
-            <dd className="inline">White</dd>
+            <dt className="inline">Price:</dt>
+            <dd className="inline">${item.price}</dd>
           </div>
         </dl>
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-2">
-        <form>
-          <label htmlFor="Line1Qty" className="sr-only">
+        <div>
+          <label htmlFor="quantity" className="sr-only">
             {" "}
             Quantity{" "}
           </label>
 
           <input
             type="number"
-            min="1"
-            value="1"
-            id="Line1Qty"
+            min={1}
+            placeholder={item.quantity.toString()}
+            id="quantity"
+            onChange={(event) => inputChangedHandler(event)}
             className="h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"
           />
-        </form>
+        </div>
 
         <button
           className="text-gray-600 transition hover:text-red-600"
           onClick={() => removeItem(item.id)}
         >
           <span className="sr-only">Remove item</span>
-
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

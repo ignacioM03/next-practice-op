@@ -13,7 +13,7 @@ export const useProductStore = create<State>((set) => ({
     {
       id: 2,
       title: "product 2",
-      price: "£24.00 GBP",
+      price: 24,
       description: "description",
       category: "summer",
       image:
@@ -23,7 +23,7 @@ export const useProductStore = create<State>((set) => ({
     {
       id: 3,
       title: "product 3",
-      price: "£28.00 GBP",
+      price: 28,
       description: "description",
       category: "winter",
       image:
@@ -33,7 +33,7 @@ export const useProductStore = create<State>((set) => ({
     {
       id: 1,
       title: "product 1",
-      price: "£2.00 GBP",
+      price: 2,
       description: "description",
       category: "summer",
       image:
@@ -43,7 +43,7 @@ export const useProductStore = create<State>((set) => ({
     {
       id: 4,
       title: "product 4",
-      price: "£15.00 GBP",
+      price: 15,
       description: "description",
       category: "winter",
       image:
@@ -69,5 +69,4 @@ export const useProductStore = create<State>((set) => ({
       ),
     })),
   clearProducts: () => set({ products: [] }),
-  
 }));

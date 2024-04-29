@@ -49,7 +49,7 @@ export const ProductCard = ({ product }: Props) => {
           {product.title}
         </h3>
 
-        <p className="mt-1.5 text-sm text-gray-700">{product.price}</p>
+        <p className="mt-1.5 text-sm text-gray-700">${product.price}</p>
 
         <div className="mt-4">
           <button

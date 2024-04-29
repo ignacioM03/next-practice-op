@@ -8,15 +8,15 @@ import { Product } from "@/types/ProductType";
 
 export default function CartPage() {
   const items = useCartStore((state) => state.items);
-  // const total = items.reduce(
-  //   (total: number, item: Product) => total + parseFloat(item.price),
-  //   0
-  // );
+  const total = items.reduce(
+    (total: number, item: Product) => total + parseFloat(item.price.toString()),
+    0
+  );
   const myTotal = {
     subtotal: 0,
     vat: 0,
     discount: 0,
-    total: 0,
+    total: total,
   };
   return (
     <div className="container mx-auto mt-8">

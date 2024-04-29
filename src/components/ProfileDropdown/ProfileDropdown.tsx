@@ -68,6 +68,9 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             <p className="font-bold">{user!.username}</p>
           </DropdownItem>
           <DropdownItem key="settings">Mi configuración</DropdownItem>
+          <DropdownItem key="my_products">
+            <Link href={"/products/myProducts"}>Mis productos</Link>
+          </DropdownItem>
           <DropdownItem key="addProduct">
             <Link href={"/products/new"}>Agregar productos</Link>
           </DropdownItem>
