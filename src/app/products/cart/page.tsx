@@ -9,7 +9,8 @@ import { Product } from "@/types/ProductType";
 export default function CartPage() {
   const items = useCartStore((state) => state.items);
   const total = items.reduce(
-    (total: number, item: Product) => total + parseFloat(item.price.toString()),
+    (total: number, item: Product) =>
+      total + parseFloat((item.price * item.quantity).toString()),
     0
   );
   const myTotal = {
@@ -18,6 +19,7 @@ export default function CartPage() {
     discount: 0,
     total: total,
   };
+
   return (
     <div className="container mx-auto mt-8">
       <StepComponent />

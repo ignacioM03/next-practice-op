@@ -1,4 +1,7 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 type TotalCardProps = {
   totalItem: {
@@ -9,6 +12,15 @@ type TotalCardProps = {
   };
 };
 export const TotalCard = ({ totalItem }: TotalCardProps) => {
+  const router = useRouter();
+  const [enable, setEnable] = useState(true);
+
+  useEffect(() => {
+    if (totalItem.total) {
+      setEnable(false);
+    }
+  }, [totalItem.total]);
+
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -62,12 +74,13 @@ export const TotalCard = ({ totalItem }: TotalCardProps) => {
                 </div>
 
                 <div className="flex justify-end">
-                  <Link
-                    href="/billing/checkout"
+                  <button
                     className="block rounded bg-gray-700 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+                    disabled={enable}
+                    onClick={() => router.push("/billing/checkout")}
                   >
                     Checkout
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

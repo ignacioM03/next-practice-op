@@ -1,6 +1,7 @@
 "use client";
 import { LoginType } from "@/types/LoginType";
 import { RegisterType } from "@/types/RegisterType";
+import { Role } from "@/types/Role";
 import { UserType } from "@/types/UserType";
 import { createContext, useContext, useState } from "react";
 
@@ -43,7 +44,7 @@ export const AuthProvider = ({ children }: Props) => {
       if (data.length > 0) {
         const myUser = {
           ...data[0],
-          role: data[0].id % 2 === 0 ? "user" : "admin",
+          role: Role.ADMIN,
         };
         setUser(myUser);
         setIsAuthenticated(true);
