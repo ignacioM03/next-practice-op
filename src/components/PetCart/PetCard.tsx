@@ -2,7 +2,6 @@ import React from "react";
 import { ButtonCard } from "../ButtonCard/ButtonCard";
 
 export const PetCard = ({ pet }: { pet: any }) => {
-  console.log(pet);
   const { name, description, picture, id } = pet;
   return (
     <article className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm max-w-md">

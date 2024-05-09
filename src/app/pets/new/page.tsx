@@ -2,32 +2,42 @@
 
 import { usePetStore } from "@/store/petStore";
 import { PetType } from "@/types/Pet";
+import { generateUUId } from "@/utils/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function NewPetPage({ params }: any) {
   const router = useRouter();
   const { id } = params;
   const [pet, setPet] = useState<PetType>();
-  const { addPet, updatePet } = usePetStore();
+  const { addPet, updatePet, getPet } = usePetStore();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    const body = {
+    const body: PetType = {
       name: e.target.name.value,
       age: 0,
       breed: "",
       status: e.target.status.value,
       description: e.target.description.value,
       picture: e.target.image.value || "",
+      id: generateUUId(),
     };
-    if (id && pet) {
+    if (id) {
       updatePet(body);
     } else {
       addPet(body);
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      const myPet = getPet(id);
+      setPet(myPet);
+    }
+  }, [id, pet]);
+
   return (
     <div className="flex justify-center">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -61,6 +71,7 @@ export default function NewPetPage({ params }: any) {
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="name"
                   placeholder="nombre de la mascota"
+                  defaultValue={pet?.name}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -93,6 +104,7 @@ export default function NewPetPage({ params }: any) {
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="description"
                   placeholder="describa la mascota"
+                  defaultValue={pet?.description}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -131,6 +143,7 @@ export default function NewPetPage({ params }: any) {
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="image"
                   placeholder="url de la imagen"
+                  defaultValue={pet?.picture}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -164,23 +177,38 @@ export default function NewPetPage({ params }: any) {
                 name="status"
                 id="status"
                 required
+                defaultValue={pet?.status}
               >
+                <option defaultValue={pet?.status}>{pet?.status}</option>
                 <option value="HOME">Avi</option>
                 <option value="WORK">Work</option>
                 <option value="SPORT">Sport</option>
               </select>
             </div>
 
-            <button
-              type="submit"
-              className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
-              onClick={() => {
-                router.refresh();
-                router.push("/pets");
-              }}
-            >
-              Agregar mascota
-            </button>
+            {id ? (
+              <button
+                type="submit"
+                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                onClick={() => {
+                  router.refresh();
+                  router.push("/pets");
+                }}
+              >
+                Actualizar mascota
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
+                onClick={() => {
+                  router.refresh();
+                  router.push("/pets");
+                }}
+              >
+                Agregar mascota
+              </button>
+            )}
 
             <p className="text-center text-sm text-gray-500">
               <Link className="underline" href="/pets">

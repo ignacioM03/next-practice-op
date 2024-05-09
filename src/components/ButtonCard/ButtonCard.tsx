@@ -1,23 +1,29 @@
+"use client";
 import { usePetStore } from "@/store/petStore";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface ButtonProps {
-  id: number;
+  id: string;
 }
 
 export const ButtonCard = ({ id }: ButtonProps) => {
   const { removePet } = usePetStore();
+  const router = useRouter();
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
+    console.log(id);
     removePet(id);
   };
-  const handleEdit = () => {};
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">
       <button
         className="inline-block border-e p-3 text-gray-700 hover:bg-gray-50 focus:relative"
         title="Edit pet"
-        onClick={() => handleDelete(id)}
+        onClick={() => {
+          router.push(`/pets/edit/${id}`);
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

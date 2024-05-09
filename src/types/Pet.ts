@@ -1,5 +1,5 @@
 export type PetType = {
-  id?: number;
+  id?: string;
   name: string;
   age?: number;
   breed?: string;
