@@ -3,7 +3,7 @@ export type PetType = {
   name: string;
   age?: number;
   breed?: string;
-  status: "available" | "pending" | "sold";
+  status: string;
   description?: string;
   picture?: string;
 };

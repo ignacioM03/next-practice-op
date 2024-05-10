@@ -3,6 +3,8 @@
 import { usePetStore } from "@/store/petStore";
 import { PetType } from "@/types/Pet";
 import { generateUUId } from "@/utils/utils";
+import { PetValidate } from "@/utils/validateForm";
+import { useFormik } from "formik";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -13,22 +15,33 @@ export default function NewPetPage({ params }: any) {
   const [pet, setPet] = useState<PetType>();
   const { addPet, updatePet, getPet } = usePetStore();
 
-  const onSubmit = (e: any) => {
-    e.preventDefault();
-    const body: PetType = {
-      name: e.target.name.value,
-      age: 0,
-      breed: "",
-      status: e.target.status.value,
-      description: e.target.description.value,
-      picture: e.target.image.value || "",
-      id: generateUUId(),
-    };
+  // const onSubmit = (e: any) => {
+  //   e.preventDefault();
+  //   const body: PetType = {
+  //     name: e.target.name.value,
+  //     age: 0,
+  //     breed: "",
+  //     status: e.target.status.value,
+  //     description: e.target.description.value,
+  //     picture: e.target.image.value || "",
+  //     id: generateUUId(),
+  //   };
+  //   if (id) {
+  //     updatePet(body);
+  //   } else {
+  //     addPet(body);
+  //   }
+  // };
+  const onSubmit = (data: PetType) => {
+    console.log(data);
     if (id) {
-      updatePet(body);
-    } else {
-      addPet(body);
+      updatePet(data);
+      router.refresh();
+      router.push("/pets");
     }
+    addPet(data);
+    router.refresh();
+    router.push("/pets");
   };
 
   useEffect(() => {
@@ -37,6 +50,20 @@ export default function NewPetPage({ params }: any) {
       setPet(myPet);
     }
   }, [id, pet]);
+
+  const { handleSubmit, handleChange, errors, values } = useFormik({
+    initialValues: {
+      name: "",
+      age: 0,
+      breed: "",
+      status: "",
+      description: "",
+      picture: "",
+      id: generateUUId(),
+    },
+    validationSchema: PetValidate,
+    onSubmit,
+  });
 
   return (
     <div className="flex justify-center">
@@ -54,7 +81,7 @@ export default function NewPetPage({ params }: any) {
           <form
             action="#"
             className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
           >
             <p className="text-center text-lg font-medium">
               Agrega una nueva mascota
@@ -70,10 +97,11 @@ export default function NewPetPage({ params }: any) {
                   type="text"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="name"
+                  name="name"
                   placeholder="nombre de la mascota"
-                  defaultValue={pet?.name}
+                  onChange={handleChange}
                 />
-
+                <small className="text-red-500">{errors?.name}</small>
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +132,10 @@ export default function NewPetPage({ params }: any) {
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="description"
                   placeholder="describa la mascota"
-                  defaultValue={pet?.description}
+                  onChange={handleChange}
+                  name="description"
                 />
-
+                <small className="text-red-500">{errors?.description}</small>
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -142,10 +171,11 @@ export default function NewPetPage({ params }: any) {
                   type="text"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="image"
+                  name="picture"
                   placeholder="url de la imagen"
                   defaultValue={pet?.picture}
                 />
-
+                <small className="text-red-500">{errors?.description}</small>
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -176,24 +206,20 @@ export default function NewPetPage({ params }: any) {
                 className="border border-gray-400 p-2 mb-4 w-full rounded-md text-black"
                 name="status"
                 id="status"
-                required
                 defaultValue={pet?.status}
               >
                 <option defaultValue={pet?.status}>{pet?.status}</option>
                 <option value="HOME">Avi</option>
                 <option value="WORK">Work</option>
                 <option value="SPORT">Sport</option>
-              </select>
+              </select>{" "}
+              <small className="text-red-500">{errors?.description}</small>
             </div>
 
             {id ? (
               <button
                 type="submit"
                 className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
-                onClick={() => {
-                  router.refresh();
-                  router.push("/pets");
-                }}
               >
                 Actualizar mascota
               </button>
@@ -201,10 +227,6 @@ export default function NewPetPage({ params }: any) {
               <button
                 type="submit"
                 className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
-                onClick={() => {
-                  router.refresh();
-                  router.push("/pets");
-                }}
               >
                 Agregar mascota
               </button>
