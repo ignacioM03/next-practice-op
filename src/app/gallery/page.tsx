@@ -35,27 +35,28 @@ export default function GalleryPage() {
 
   const images = [
     {
-      src: "/public/1077530.jpg",
+      src: "https://cdn.pixabay.com/photo/2016/10/20/18/35/earth-1756274_640.jpg",
       alt: "image-1",
       width: 300,
       height: 300,
     },
     {
-      src: "/public/1076554.jpg",
+      src: "https://cdn.pixabay.com/photo/2024/01/14/12/30/baseball-8507868_1280.jpg",
       alt: "image-2",
       width: 300,
       height: 300,
     },
     {
-      src: "/public/865032.jpg",
+      src: "https://cdn.pixabay.com/photo/2024/04/20/11/47/ai-generated-8708404_1280.jpg",
       alt: "image-3",
       width: 300,
       height: 300,
     },
   ];
   return (
-    <div>
+    <div className="container ml-16 mt-10">
       <div className="flex justify-center">
+        <label htmlFor="brightness">Brillo</label>
         <input
           type="range"
           min="0"
@@ -63,6 +64,7 @@ export default function GalleryPage() {
           value={brightness}
           onChange={(e) => setBrightness(Number(e.target.value))}
         />
+        <label htmlFor="contrast">Contraste</label>
         <input
           type="range"
           min="0"
@@ -70,6 +72,7 @@ export default function GalleryPage() {
           value={contrast}
           onChange={(e) => setContrast(Number(e.target.value))}
         />
+        <label htmlFor="saturation">Saturacion</label>
         <input
           type="range"
           min="0"
@@ -78,7 +81,9 @@ export default function GalleryPage() {
           onChange={(e) => setSaturation(Number(e.target.value))}
         />
       </div>
-      <div>{renderImages()}</div>
+      <div className="grid grid-cols-3 gap-4 mt-20 mx-auto">
+        {renderImages()}
+      </div>
     </div>
   );
 }
