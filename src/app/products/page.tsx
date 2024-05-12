@@ -7,10 +7,38 @@ export default function ProductsPage() {
   const [priceFilter, setPriceFilter] = useState("");
 
   const products = [
-    { id: 1, name: "Producto 1", category: "Electrónica", price: 100 },
-    { id: 2, name: "Producto 2", category: "Ropa", price: 50 },
-    { id: 3, name: "Producto 3", category: "Electrónica", price: 200 },
-    { id: 4, name: "Producto 4", category: "Ropa", price: 80 },
+    {
+      id: 1,
+      name: "Producto 1",
+      category: "Electrónica",
+      price: 100,
+      productImage:
+        "https://http2.mlstatic.com/D_NQ_NP_823777-MLU54974953656_042023-O.webp",
+    },
+    {
+      id: 2,
+      name: "Producto 2",
+      category: "Ropa",
+      price: 50,
+      productImage:
+        "https://http2.mlstatic.com/D_NQ_NP_656678-MLA69951087361_062023-O.webp",
+    },
+    {
+      id: 3,
+      name: "Producto 3",
+      category: "Electrónica",
+      price: 200,
+      productImage:
+        "https://http2.mlstatic.com/D_NQ_NP_814186-MLU75357554401_032024-O.webp",
+    },
+    {
+      id: 4,
+      name: "Producto 4",
+      category: "Ropa",
+      price: 80,
+      productImage:
+        "https://http2.mlstatic.com/D_NQ_NP_882734-MLU70045094648_062023-O.webp",
+    },
   ];
 
   const filteredProducts = useMemo(() => {
@@ -32,7 +60,7 @@ export default function ProductsPage() {
   }, [categoryFilter, priceFilter, products]);
 
   return (
-    <div className="justify-center">
+    <div className="px-auto ">
       <section>
         <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <header>
