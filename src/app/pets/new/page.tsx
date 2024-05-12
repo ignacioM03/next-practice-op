@@ -42,7 +42,8 @@ export default function NewPetPage({ params }: any) {
       id: generateUUId(),
     };
     if (id) {
-      updatePet(body);
+      const updatedPet = { ...body, id };
+      updatePet(updatedPet);
     } else {
       createPet(body);
       router.refresh();
