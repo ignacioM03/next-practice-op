@@ -1,6 +1,6 @@
 "use client";
-import { usePetStore } from "@/store/petStore";
-import Link from "next/link";
+import { usePetContext } from "@/context/PetContext";
+import { HandlePetActions } from "@/hooks/HandlePetReducer";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -9,12 +9,11 @@ interface ButtonProps {
 }
 
 export const ButtonCard = ({ id }: ButtonProps) => {
-  const { removePet } = usePetStore();
+  const { dispatch } = usePetContext();
   const router = useRouter();
 
   const handleDelete = (id: string) => {
-    console.log(id);
-    removePet(id);
+    dispatch({ type: HandlePetActions.REMOVE_PET, payload: id });
   };
   return (
     <span className="inline-flex overflow-hidden rounded-md border bg-white shadow-sm">

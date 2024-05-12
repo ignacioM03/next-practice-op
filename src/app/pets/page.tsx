@@ -1,16 +1,17 @@
 "use client";
 import { Pagination } from "@/components/Pagination/Pagination";
 import { PetCard } from "@/components/PetCart/PetCard";
-import { usePetStore } from "@/store/petStore";
+import { usePetContext } from "@/context/PetContext";
+import { PetType } from "@/types/Pet";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function PetsPage() {
-  const { pets } = usePetStore();
-  const { getPets } = usePetStore();
+  const [myPets, setMyPets] = useState<PetType[]>([]);
+  const { state } = usePetContext();
 
   useEffect(() => {
-    getPets();
+    setMyPets(state.pets);
   }, []);
 
   return (
@@ -23,8 +24,8 @@ export default function PetsPage() {
         Agregar Mascota
       </Link>
       <div className="grid gap-4 grid-cols-3 grid-rows-3 mt-6  justify-center">
-        {pets.length > 0 ? (
-          pets.map((pet: any) => <PetCard key={pet.id} pet={pet} />)
+        {myPets.length > 0 ? (
+          myPets.map((pet: any) => <PetCard key={pet.id} pet={pet} />)
         ) : (
           <div className="flex ">
             <p className="text-center">No pets</p>

@@ -1,6 +1,7 @@
 "use client";
 
-import { usePetStore } from "@/store/petStore";
+import { usePetContext } from "@/context/PetContext";
+import { HandlePetActions } from "@/hooks/HandlePetReducer";
 import { PetType } from "@/types/Pet";
 import { generateUUId } from "@/utils/utils";
 import { PetValidate } from "@/utils/validateForm";
@@ -13,57 +14,47 @@ export default function NewPetPage({ params }: any) {
   const router = useRouter();
   const { id } = params;
   const [pet, setPet] = useState<PetType>();
-  const { addPet, updatePet, getPet } = usePetStore();
+  const { state, dispatch } = usePetContext();
 
-  // const onSubmit = (e: any) => {
-  //   e.preventDefault();
-  //   const body: PetType = {
-  //     name: e.target.name.value,
-  //     age: 0,
-  //     breed: "",
-  //     status: e.target.status.value,
-  //     description: e.target.description.value,
-  //     picture: e.target.image.value || "",
-  //     id: generateUUId(),
-  //   };
-  //   if (id) {
-  //     updatePet(body);
-  //   } else {
-  //     addPet(body);
-  //   }
-  // };
-  const onSubmit = (data: PetType) => {
-    console.log(data);
+  const createPet = (pet: PetType) => {
+    dispatch({ type: HandlePetActions.ADD_PET, payload: pet });
+  };
+
+  const updatePet = (updatedPet: PetType) => {
+    dispatch({ type: HandlePetActions.UPDATE_PET, payload: updatedPet });
+  };
+
+  const fetchPet = (id: string) => {
+    const pet = state.pets.find((pet) => pet.id === id);
+    if (pet) {
+      setPet(pet);
+    }
+  };
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    const body: PetType = {
+      name: e.target.name.value,
+      age: 0,
+      breed: "",
+      description: e.target.description.value,
+      status: e.target.status.value,
+      picture: e.target.image.value || "",
+      id: generateUUId(),
+    };
     if (id) {
-      updatePet(data);
+      updatePet(body);
+    } else {
+      createPet(body);
       router.refresh();
       router.push("/pets");
     }
-    addPet(data);
-    router.refresh();
-    router.push("/pets");
   };
 
   useEffect(() => {
     if (id) {
-      const myPet = getPet(id);
-      setPet(myPet);
+      fetchPet(id);
     }
   }, [id, pet]);
-
-  const { handleSubmit, handleChange, errors, values } = useFormik({
-    initialValues: {
-      name: "",
-      age: 0,
-      breed: "",
-      status: "",
-      description: "",
-      picture: "",
-      id: generateUUId(),
-    },
-    validationSchema: PetValidate,
-    onSubmit,
-  });
 
   return (
     <div className="flex justify-center">
@@ -81,7 +72,7 @@ export default function NewPetPage({ params }: any) {
           <form
             action="#"
             className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
           >
             <p className="text-center text-lg font-medium">
               Agrega una nueva mascota
@@ -99,9 +90,8 @@ export default function NewPetPage({ params }: any) {
                   id="name"
                   name="name"
                   placeholder="nombre de la mascota"
-                  onChange={handleChange}
+                  defaultValue={pet?.name}
                 />
-                <small className="text-red-500">{errors?.name}</small>
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +122,9 @@ export default function NewPetPage({ params }: any) {
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   id="description"
                   placeholder="describa la mascota"
-                  onChange={handleChange}
+                  defaultValue={pet?.description}
                   name="description"
                 />
-                <small className="text-red-500">{errors?.description}</small>
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +164,7 @@ export default function NewPetPage({ params }: any) {
                   placeholder="url de la imagen"
                   defaultValue={pet?.picture}
                 />
-                <small className="text-red-500">{errors?.description}</small>
+
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +202,6 @@ export default function NewPetPage({ params }: any) {
                 <option value="WORK">Work</option>
                 <option value="SPORT">Sport</option>
               </select>{" "}
-              <small className="text-red-500">{errors?.description}</small>
             </div>
 
             {id ? (
