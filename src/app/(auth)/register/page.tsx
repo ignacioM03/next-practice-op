@@ -4,16 +4,25 @@ import { useAuth } from "@/context/UseAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
+import { RegisterType } from "@/types/RegisterType";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { GoogleAuth } from "@/components/GoogleAuth/GoogleAuth";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { RegisterValidate } from "@/utils/validateForm";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { register } = useAuth();
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const res = await register({ name, email, password });
+  const { signUp } = useAuth();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<RegisterType>({
+    resolver: yupResolver(RegisterValidate),
+  });
+  const onSubmit: SubmitHandler<RegisterType> = async (data) => {
+    const { username, name, password } = data;
+    const res = await signUp({ name, username, password });
     if (res) router.push("/login");
   };
   return (
@@ -31,7 +40,7 @@ export default function RegisterPage() {
 
           <form
             className="mb-0 mt-8 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <p className="text-center text-lg font-medium">Registrate ahora!</p>
 
@@ -44,29 +53,16 @@ export default function RegisterPage() {
                 <input
                   type="name"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter name"
+                  placeholder="Ingrese su nombre"
                   id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  {...register("name", { required: true, maxLength: 30 })}
                 />
-
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="size-4 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                    />
-                  </svg>
-                </span>
               </div>
+              {errors.name && (
+                <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             <div>
@@ -78,10 +74,9 @@ export default function RegisterPage() {
                 <input
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter email"
+                  placeholder="Ingrese su email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  {...register("username", { required: true })}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -101,6 +96,11 @@ export default function RegisterPage() {
                   </svg>
                 </span>
               </div>
+              {errors.username && (
+                <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                  {errors.username.message}
+                </p>
+              )}
             </div>
 
             <div>
@@ -112,12 +112,10 @@ export default function RegisterPage() {
                 <input
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter password"
+                  placeholder="Ingrese su contraseña"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password", { required: true })}
                 />
-
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -141,15 +139,19 @@ export default function RegisterPage() {
                   </svg>
                 </span>
               </div>
+              {errors.password && (
+                <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-
             <button
               type="submit"
               className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
             >
               Crear Cuenta
             </button>
-
+            <GoogleAuth />
             <p className="text-center text-sm text-gray-500">
               tienes una cuenta?
               <Link className="underline" href="/login">

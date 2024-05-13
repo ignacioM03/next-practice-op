@@ -7,12 +7,13 @@ import { createContext, useContext, useState } from "react";
 
 type contextAuth = {
   login: (user: LoginType) => void;
-  register: (user: RegisterType) => void;
+  signUp: (user: RegisterType) => void;
   logout: () => void;
   user: UserType | null;
   isAuthenticated: boolean;
   loading: boolean;
   errors: string | null;
+  signInWithGoogle: (body: any) => void;
 };
 
 type Props = {
@@ -55,7 +56,7 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  const register = async (user: RegisterType) => {
+  const signUp = async (user: RegisterType) => {
     try {
       const res = await fetch("http://localhost:3000/api/register", {
         method: "POST",
@@ -77,14 +78,32 @@ export const AuthProvider = ({ children }: Props) => {
     setIsAuthenticated(false);
   };
 
+  const signInWithGoogle = async (body: any) => {
+    try {
+      const res = await registerGoogleRequest(body);
+      setUser(res.data.user);
+      //dispatch(setProfileUser(res.data.user));
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userName", res.data.user.userName);
+      localStorage.setItem("profileImage", res.data.user.profileImage);
+      setIsAuthenticated(true);
+      return res;
+    } catch (error: any) {
+      console.log(error.response.data);
+      setErrors(error.response.data);
+    }
+  };
+
+
   const value = {
     login,
-    register,
+    signUp,
     logout,
     user,
     isAuthenticated,
     loading,
     errors,
+    signInWithGoogle,
   };
   return <authContext.Provider value={value}>{children}</authContext.Provider>;
 };

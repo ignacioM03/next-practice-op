@@ -7,4 +7,5 @@ export interface Product {
   image: string;
   quantity: number;
   userId?: string;
+  isOffer?: boolean;
 }

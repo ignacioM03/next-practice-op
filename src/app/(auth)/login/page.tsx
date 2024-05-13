@@ -1,19 +1,30 @@
 "use client";
 
+import { GoogleAuth } from "@/components/GoogleAuth/GoogleAuth";
 import { useAuth } from "@/context/UseAuth";
+import { LoginType } from "@/types/LoginType";
 import { Role } from "@/types/Role";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+
+type SignInErrorsType = {
+  message: string;
+};
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { login } = useAuth();
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    const res = await login({ username: email, password });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<LoginType>({});
+
+  const onSubmit: SubmitHandler<LoginType> = async (data) => {
+    const { username, password } = data;
+    const res = login({ username, password });
+    if (res === undefined) return;
     const user = {
       ...(res || {}), // Ensure that res is an object before spreading it
       role: Role.ADMIN,
@@ -23,6 +34,7 @@ export default function LoginPage() {
       ? router.push("/dashboard")
       : router.push("/products");
   };
+
   return (
     <div className="flex justify-end ">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 mt-9">
@@ -38,14 +50,14 @@ export default function LoginPage() {
 
           <form
             className="mb-0 mt-8 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <p className="text-center text-lg font-medium">
               Ingresa con tu cuenta
             </p>
 
             <div>
-              <label htmlFor="email" className="sr-only">
+              <label htmlFor="username" className="sr-only">
                 Email
               </label>
 
@@ -54,9 +66,8 @@ export default function LoginPage() {
                   type="email"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="username"
+                  {...register("username", { required: true })}
                 />
 
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -76,23 +87,24 @@ export default function LoginPage() {
                   </svg>
                 </span>
               </div>
+              {errors.username && (
+                <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                  Username o Email requerido
+                </p>
+              )}
             </div>
-
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
               </label>
-
               <div className="relative">
                 <input
                   type="password"
                   className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                   placeholder="Enter password"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  {...register("password", { required: true })}
                 />
-
                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -116,15 +128,19 @@ export default function LoginPage() {
                   </svg>
                 </span>
               </div>
+              {errors.password && (
+                <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                  Contraseña requerida
+                </p>
+              )}
             </div>
-
             <button
               type="submit"
               className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white"
             >
               Iniciar Sesion
             </button>
-
+            <GoogleAuth />
             <p className="text-center text-sm text-gray-500">
               No tienes cuenta?
               <Link className="underline" href="/register">
