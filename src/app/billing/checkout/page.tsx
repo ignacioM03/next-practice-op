@@ -7,6 +7,7 @@ export default function CheckoutPage() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    console.log(e.target);
     console.log("submit");
   };
 

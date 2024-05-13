@@ -42,7 +42,7 @@ export const ProductCard = ({ product }: Props) => {
       <div className="relative border border-gray-100 bg-white p-6">
         <span className="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
           {" "}
-          New{" "}
+          Nuevo{" "}
         </span>
 
         <h3 className="mt-4 text-lg font-medium text-gray-900">

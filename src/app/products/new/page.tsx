@@ -1,20 +1,23 @@
 "use client";
 
+import { useAuth } from "@/context/UseAuth";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
 
 export default function NewProductPage() {
   const addProduct = useProductStore((state) => state.addProduct);
+  const { user } = useAuth();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const product: Product = {
       title: e.target.title.value || "",
-      image: e.target.image.value  || "",
+      image: e.target.image.value || "",
       price: e.target.price.value || "",
       quantity: e.target.quantity.value || "",
       description: e.target.description.value || "",
       category: "",
       id: Date.now(),
+      userId: user?.id,
     };
     addProduct(product);
   };

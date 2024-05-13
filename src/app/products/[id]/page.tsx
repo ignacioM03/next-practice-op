@@ -1,7 +1,25 @@
+"use client";
+import { useCartStore } from "@/store/CartStore";
 import { useProductStore } from "@/store/Products";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export default function ProductPage() {
+  const { id } = useParams();
+  const addItem = useCartStore((state) => state.addItem);
+  const product = useProductStore((state) => state.getProduct(parseInt(id)));
+  const [quantity, setQuantity] = useState(1);
+
+  const handleAddItem = () => {
+    if (product) {
+      const newItem = {
+        ...product,
+        quantity: quantity,
+      };
+      addItem(newItem);
+    }
+  };
   return (
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -9,25 +27,25 @@ export default function ProductPage() {
           <Image
             alt="ecommerce"
             className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
-            src="https://dummyimage.com/400x400"
+            src={product!.image}
             width={400}
             height={400}
           />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
-              BRAND NAME
+              NOMBRE DE LA MARCA
             </h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
-              The Catcher in the Rye
+              {product?.title}
             </h1>
             <div className="flex mb-4">
               <span className="flex items-center">
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-4 h-4 text-indigo-500"
                   viewBox="0 0 24 24"
                 >
@@ -36,9 +54,9 @@ export default function ProductPage() {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-4 h-4 text-indigo-500"
                   viewBox="0 0 24 24"
                 >
@@ -47,9 +65,9 @@ export default function ProductPage() {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-4 h-4 text-indigo-500"
                   viewBox="0 0 24 24"
                 >
@@ -58,9 +76,9 @@ export default function ProductPage() {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-4 h-4 text-indigo-500"
                   viewBox="0 0 24 24"
                 >
@@ -69,9 +87,9 @@ export default function ProductPage() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-4 h-4 text-indigo-500"
                   viewBox="0 0 24 24"
                 >
@@ -83,9 +101,9 @@ export default function ProductPage() {
                 <a className="text-gray-500">
                   <svg
                     fill="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
                   >
@@ -95,9 +113,9 @@ export default function ProductPage() {
                 <a className="text-gray-500">
                   <svg
                     fill="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
                   >
@@ -107,9 +125,9 @@ export default function ProductPage() {
                 <a className="text-gray-500">
                   <svg
                     fill="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     className="w-5 h-5"
                     viewBox="0 0 24 24"
                   >
@@ -127,28 +145,31 @@ export default function ProductPage() {
               cardigan.
             </p>
             <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-              <div className="flex">
+              {/* <div className="flex">
                 <span className="mr-3">Color</span>
                 <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
                 <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
                 <button className="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-6 h-6 focus:outline-none"></button>
-              </div>
+              </div> */}
               <div className="flex ml-6 items-center">
-                <span className="mr-3">Size</span>
+                <span className="mr-3">Cantidad</span>
                 <div className="relative">
-                  <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                    <option>SM</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>XL</option>
+                  <select
+                    className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                  >
+                    <option value={"1"}>1</option>
+                    <option value={"2"}>2</option>
+                    <option value={"3"}>3</option>
+                    <option value={"4"}>4</option>
                   </select>
                   <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                     <svg
                       fill="none"
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       className="w-4 h-4"
                       viewBox="0 0 24 24"
                     >
@@ -160,17 +181,20 @@ export default function ProductPage() {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                $58.00
+                ${product!.price}
               </span>
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-                Button
+              <button
+                className="flex ml-auto text-white bg-teal-500 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded"
+                onClick={() => handleAddItem()}
+              >
+                Comprar
               </button>
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg
                   fill="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
                 >
