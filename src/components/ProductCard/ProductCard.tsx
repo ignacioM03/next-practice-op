@@ -1,3 +1,4 @@
+import { useAuth } from "@/context/UseAuth";
 import { useCartStore } from "@/store/CartStore";
 import { Product } from "@/types/ProductType";
 import Image from "next/image";
@@ -8,6 +9,8 @@ type Props = {
 };
 export const ProductCard = ({ product }: Props) => {
   const addItem = useCartStore((state) => state.addItem);
+
+  const { isAuthenticated } = useAuth();
   return (
     <div className="group relative block overflow-hidden text-white">
       <Link className="" href={`products/${product.id}`}>
@@ -31,7 +34,7 @@ export const ProductCard = ({ product }: Props) => {
         </button>
 
         <Image
-          src={product.image}
+          src={product.image!}
           alt=""
           className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           width={400}
@@ -54,6 +57,7 @@ export const ProductCard = ({ product }: Props) => {
         <div className="mt-4">
           <button
             className="block w-full rounded bg-teal-600 p-4 text-sm font-medium transition hover:scale-105"
+            disabled={!isAuthenticated}
             onClick={() => addItem(product)}
           >
             Add to Cart

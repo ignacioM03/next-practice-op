@@ -16,6 +16,7 @@ type ProfileProps = {
 };
 
 export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
+
   const router = useRouter();
   return user!.role === "user" ? (
     <div className="flex items-center gap-4">

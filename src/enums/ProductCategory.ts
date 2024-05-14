@@ -12,6 +12,7 @@ export enum ProductCategory {
   Games = "Games",
   BooksAndMovies = "Books and Movies",
   SportsAndFitness = "Sports and Fitness",
+  Shoes = "Shoes",
 }
 
 export const productCategories = Object.values(ProductCategory);

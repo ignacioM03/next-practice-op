@@ -6,7 +6,7 @@ export interface Product {
   category: string;
   discountPercentage?: number;
   rating?: number;
-  image?: string;
+  image: string;
   quantity?: number;
   stock?: number;
   brand?: string;

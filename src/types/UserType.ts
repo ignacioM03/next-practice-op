@@ -6,7 +6,7 @@ export interface UserType {
   password?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  role?: "admin" | "user";
+  role?: "admin" | "user" | "";
   profilePicture: string;
   website: string;
   phone: string;
