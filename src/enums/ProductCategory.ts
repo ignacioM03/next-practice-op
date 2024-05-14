@@ -1,4 +1,4 @@
-enum ProductCategory {
+export enum ProductCategory {
   Electronics = "Electronics",
   Clothing = "Clothing",
   Books = "Books",
@@ -13,3 +13,5 @@ enum ProductCategory {
   BooksAndMovies = "Books and Movies",
   SportsAndFitness = "Sports and Fitness",
 }
+
+export const productCategories = Object.values(ProductCategory);

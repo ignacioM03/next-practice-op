@@ -1,7 +1,10 @@
 "use client";
+import { productCategories } from "@/enums/ProductCategory";
 import { useFilters } from "@/hooks/useFilter";
+import { useState } from "react";
 
 export const Filters = () => {
+  const [categories] = useState(productCategories);
   const { filters, setFilters } = useFilters() ?? {};
 
   const handleChangeMaxPrice = (event: any) => {
@@ -13,7 +16,10 @@ export const Filters = () => {
   };
 
   const handleChangeCategory = (event: any) => {
-    setFilters({ categoryFilter: event.target.value });
+    const category = event.target.value;
+    const isChecked = event.target.checked;
+    if (isChecked) setFilters({ categoryFilter: category });
+    else setFilters({ categoryFilter: "" });
   };
 
   const handleChangeTitle = (event: any) => {
@@ -217,7 +223,7 @@ export const Filters = () => {
 
           <details className="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition">
-              <span className="text-sm font-medium"> Colors </span>
+              <span className="text-sm font-medium"> Categories </span>
 
               <span className="transition group-open:-rotate-180">
                 <svg
@@ -250,113 +256,27 @@ export const Filters = () => {
               </header>
 
               <ul className="space-y-1 border-t border-gray-200 p-4">
-                <li>
-                  <label
-                    htmlFor="FilterRed"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterRed"
-                      className="size-5 rounded border-gray-300"
-                    />
+                {categories.map((category) => (
+                  <li key={category}>
+                    <label
+                      htmlFor={filters.categoryFilter}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <input
+                        type="checkbox"
+                        id={filters.categoryFilter}
+                        className="size-5 rounded border-gray-300"
+                        value={category}
+                        onChange={handleChangeCategory}
+                      />
 
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Red{" "}
-                    </span>
-                  </label>
-                </li>
-
-                <li>
-                  <label
-                    htmlFor="FilterBlue"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterBlue"
-                      className="size-5 rounded border-gray-300"
-                    />
-
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Blue{" "}
-                    </span>
-                  </label>
-                </li>
-
-                <li>
-                  <label
-                    htmlFor="FilterGreen"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterGreen"
-                      className="size-5 rounded border-gray-300"
-                    />
-
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Green{" "}
-                    </span>
-                  </label>
-                </li>
-
-                <li>
-                  <label
-                    htmlFor="FilterOrange"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterOrange"
-                      className="size-5 rounded border-gray-300"
-                    />
-
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Orange{" "}
-                    </span>
-                  </label>
-                </li>
-
-                <li>
-                  <label
-                    htmlFor="FilterPurple"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterPurple"
-                      className="size-5 rounded border-gray-300"
-                    />
-
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Purple{" "}
-                    </span>
-                  </label>
-                </li>
-
-                <li>
-                  <label
-                    htmlFor="FilterTeal"
-                    className="inline-flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      id="FilterTeal"
-                      className="size-5 rounded border-gray-300"
-                    />
-
-                    <span className="text-sm font-medium text-gray-700">
-                      {" "}
-                      Teal{" "}
-                    </span>
-                  </label>
-                </li>
+                      <span className="text-sm font-medium text-gray-700">
+                        {" "}
+                        {category}{" "}
+                      </span>
+                    </label>
+                  </li>
+                ))}
               </ul>
             </div>
           </details>
