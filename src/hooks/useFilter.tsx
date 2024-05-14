@@ -6,6 +6,16 @@ import { FiltersContext } from "@/context/Filters";
 export function useFilters() {
   const filtersContext = useContext(FiltersContext);
 
+  const reset = () => {
+    setFilters({
+      categoryFilter: "",
+      minPrice: "",
+      title: "",
+      maxPrice: "",
+      availability: "",
+    });
+  };
+
   if (!filtersContext) {
     return;
   }
@@ -44,5 +54,5 @@ export function useFilters() {
       return true;
     });
   };
-  return { filters, filteredProducts, setFilters };
+  return { filters, filteredProducts, setFilters, reset };
 }

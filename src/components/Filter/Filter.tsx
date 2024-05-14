@@ -4,8 +4,9 @@ import { useFilters } from "@/hooks/useFilter";
 import { useState } from "react";
 
 export const Filters = () => {
+  const [countSelected, setCountSelected] = useState(0);
   const [categories] = useState(productCategories);
-  const { filters, setFilters } = useFilters() ?? {};
+  const { filters, setFilters, reset } = useFilters() ?? {};
 
   const handleChangeMaxPrice = (event: any) => {
     setFilters({ maxPrice: event.target.value });
@@ -18,8 +19,13 @@ export const Filters = () => {
   const handleChangeCategory = (event: any) => {
     const category = event.target.value;
     const isChecked = event.target.checked;
-    if (isChecked) setFilters({ categoryFilter: category });
-    else setFilters({ categoryFilter: "" });
+    if (isChecked) {
+      setFilters({ categoryFilter: category });
+      setCountSelected(countSelected + 1);
+    } else {
+      setFilters({ categoryFilter: "" });
+      setCountSelected(countSelected - 1);
+    }
   };
 
   const handleChangeTitle = (event: any) => {
@@ -85,6 +91,7 @@ export const Filters = () => {
                 <button
                   type="button"
                   className="text-sm text-gray-900 underline underline-offset-4"
+                  onClick={reset}
                 >
                   Reset
                 </button>
@@ -180,6 +187,7 @@ export const Filters = () => {
                 <button
                   type="button"
                   className="text-sm text-gray-900 underline underline-offset-4"
+                  onClick={reset}
                 >
                   Reset
                 </button>
@@ -245,11 +253,15 @@ export const Filters = () => {
 
             <div className="border-t border-gray-200 bg-white">
               <header className="flex items-center justify-between p-4">
-                <span className="text-sm text-gray-700"> 0 Selected </span>
+                <span className="text-sm text-gray-700">
+                  {" "}
+                  {countSelected} Selected{" "}
+                </span>
 
                 <button
                   type="button"
                   className="text-sm text-gray-900 underline underline-offset-4"
+                  onClick={reset}
                 >
                   Reset
                 </button>
