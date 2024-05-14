@@ -22,12 +22,11 @@ export function useFilters() {
       }
 
       if (
-        filters.priceFilter &&
-        product.price > parseFloat(filters.priceFilter)
+        (filters.minPrice && product.price < parseFloat(filters.minPrice)) ||
+        (filters.maxPrice && product.price > parseFloat(filters.maxPrice))
       ) {
         return false;
       }
-
       if (
         filters.title &&
         !product.title.toLowerCase().includes(filters.title.toLowerCase())
@@ -41,6 +40,7 @@ export function useFilters() {
       ) {
         return false;
       }
+
       return true;
     });
   };

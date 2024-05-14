@@ -4,8 +4,12 @@ import { useFilters } from "@/hooks/useFilter";
 export const Filters = () => {
   const { filters, setFilters } = useFilters() ?? {};
 
-  const handleChangePrice = (event: any) => {
-    setFilters({ priceFilter: event.target.value });
+  const handleChangeMaxPrice = (event: any) => {
+    setFilters({ maxPrice: event.target.value });
+  };
+
+  const handleChangeMinPrice = (event: any) => {
+    setFilters({ minPrice: event.target.value });
   };
 
   const handleChangeCategory = (event: any) => {
@@ -178,32 +182,32 @@ export const Filters = () => {
               <div className="border-t border-gray-200 p-4">
                 <div className="flex justify-between gap-4">
                   <label
-                    htmlFor="FilterPriceFrom"
+                    htmlFor={filters.minPrice}
                     className="flex items-center gap-2"
                   >
                     <span className="text-sm text-gray-600">$</span>
 
                     <input
                       type="number"
-                      id="FilterPriceFrom"
+                      id={filters.minPrice}
                       placeholder="From"
                       className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-                      onChange={handleChangePrice}
+                      onChange={handleChangeMinPrice}
                     />
                   </label>
 
                   <label
-                    htmlFor="FilterPriceTo"
+                    htmlFor={filters.maxPrice}
                     className="flex items-center gap-2"
                   >
                     <span className="text-sm text-gray-600">$</span>
 
                     <input
                       type="number"
-                      id="FilterPriceTo"
+                      id={filters.maxPrice}
                       placeholder="To"
                       className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
-                      onChange={handleChangePrice}
+                      onChange={handleChangeMaxPrice}
                     />
                   </label>
                 </div>

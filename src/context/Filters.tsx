@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { createContext, useState } from "react";
 
 type ContextProps = {
@@ -15,8 +15,9 @@ type Props = {
 export function FiltersProvider({ children }: Props) {
   const [filters, setFilters] = useState({
     categoryFilter: "",
-    priceFilter: "",
+    minPrice: "",
     title: "",
+    maxPrice: "",
     availability: "",
   });
   return (

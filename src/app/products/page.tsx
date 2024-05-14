@@ -60,9 +60,11 @@ export default function ProductsPage() {
           <div className="lg:col-span-3">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filters.length > 0 ? (
-                filters.map((product: Product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))
+                filters
+                  .slice(0, 10)
+                  .map((product: Product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))
               ) : (
                 <p className="font-bold text-4xl ">
                   No se encontraron productos
