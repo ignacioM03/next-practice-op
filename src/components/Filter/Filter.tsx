@@ -1,32 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import { useFilters } from "@/hooks/useFilter";
 
-
-type FiltersProps ={
-  changeFilters: ()=> void;
-}
-export const Filters = ({onChangeFilters}:any) => {
-  //const { filters, setFilters } = useFilters()
-  const [categoryFilter, setCategoryFilter] = useState("");
-  const [priceFilter, setPriceFilter] = useState("");
-  const [title, setTitle] = useState("");
-  const [availability, setAvailability] = useState("");
+export const Filters = () => {
+  const { filters, setFilters } = useFilters() ?? {};
 
   const handleChangePrice = (event: any) => {
-    setPriceFilter(event.target.value);
-    onChangeFilters((prevState: any) => {
-      return { ...prevState, priceFilter: event.target.value };
-    });
+    setFilters({ priceFilter: event.target.value });
   };
 
   const handleChangeCategory = (event: any) => {
-    setCategoryFilter(event.target.value);
-    //changeFilters({ categoryFilter: event.target.value });
+    setFilters({ categoryFilter: event.target.value });
   };
 
   const handleChangeTitle = (event: any) => {
-    setTitle(event.target.value);
-    onChangeFilters((prevState: any) => {
+    setFilters((prevState: any) => {
       return { ...prevState, title: event.target.value };
     });
   };
@@ -35,7 +22,7 @@ export const Filters = ({onChangeFilters}:any) => {
     <div className="hidden space-y-4 lg:block">
       <div>
         <label
-          htmlFor="SortBy"
+          htmlFor={filters.title}
           className="block text-xs font-medium text-gray-700"
         >
           {" "}
@@ -43,11 +30,11 @@ export const Filters = ({onChangeFilters}:any) => {
         </label>
 
         <select
-          id="SortBy"
+          id={filters.title}
           className="mt-1 rounded border-gray-300 text-sm"
           onChange={handleChangeTitle}
         >
-          <option>Sort By</option>
+          <option value={"all"}>Sort By</option>
           <option value="Title, DESC">Title, DESC</option>
           <option value="Title, ASC">Title, ASC</option>
           <option value="Price, DESC">Price, DESC</option>
@@ -202,7 +189,6 @@ export const Filters = ({onChangeFilters}:any) => {
                       placeholder="From"
                       className="w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                       onChange={handleChangePrice}
-
                     />
                   </label>
 

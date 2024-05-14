@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
 import { AuthProvider } from "@/context/UseAuth";
 import { Footer } from "@/components/Footer/Footer";
+import { FiltersProvider } from "@/context/Filters";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,9 @@ export default function RootLayout({
         <NextUIProvider>
           <AuthProvider>
             <Navbar />
-            <main className="">{children}</main>
+            <FiltersProvider>
+              <main className="">{children}</main>
+            </FiltersProvider>
             <Footer />
           </AuthProvider>
         </NextUIProvider>

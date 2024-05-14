@@ -2,50 +2,17 @@
 import { BlurryDivider } from "@/components/BlurryDivider/BlurryDivider";
 import { Filters } from "@/components/Filter/Filter";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
+import { useFilters } from "@/hooks/useFilter";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductsPage() {
   const products = useProductStore((state) => state.products);
-  const [filters, setFilters] = useState({
-    categoryFilter: "",
-    priceFilter: "",
-    title: "",
-    availability: "",
-  });
+  const { filteredProducts } = useFilters() ?? {};
   const [disabled, setDisabled] = useState(false);
 
-  const filteredProducts = useMemo(() => {
-    return products.filter((product: Product) => {
-      if (
-        filters.categoryFilter &&
-        product.category !== filters.categoryFilter
-      ) {
-        return false;
-      }
-
-      if (
-        filters.priceFilter &&
-        product.price > parseFloat(filters.priceFilter)
-      ) {
-        return false;
-      }
-
-      if (
-        filters.title &&
-        !product.title.toLowerCase().includes(filters.title.toLowerCase())
-      ) {
-        return false;
-      }
-
-      // if (filters.availability && product.quantity !== (filters.availability === "available")) {
-      //   return false;
-      // }
-      return true;
-    });
-  }, [filters, products]);
+  const filters = filteredProducts!(products);
 
   useEffect(() => {
     products.some((product: Product) => product.id === 1)
@@ -89,15 +56,17 @@ export default function ProductsPage() {
         </div>
 
         <div className="mt-4 lg:mt-8 lg:grid lg:grid-cols-4 lg:items-start lg:gap-8">
-          <Filters onChangeFilters={setFilters} />
+          <Filters />
           <div className="lg:col-span-3">
             <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((product: Product) => (
+              {filters.length > 0 ? (
+                filters.map((product: Product) => (
                   <ProductCard key={product.id} product={product} />
                 ))
               ) : (
-                <p className="font-bold text-4xl ">No products found</p>
+                <p className="font-bold text-4xl ">
+                  No se encontraron productos
+                </p>
               )}
             </ul>
           </div>

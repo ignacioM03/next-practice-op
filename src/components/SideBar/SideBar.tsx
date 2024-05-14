@@ -1,10 +1,14 @@
+import { useAuth } from "@/context/UseAuth";
 import { UserType } from "@/types/UserType";
+import { useRouter } from "next/navigation";
 
 type UserProps = {
   user: UserType | null;
 };
 
 export const SideBar = ({ user }: UserProps) => {
+  const { logout } = useAuth();
+  const router = useRouter();
   return (
     <div className="">
       <h1 className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
@@ -127,14 +131,16 @@ export const SideBar = ({ user }: UserProps) => {
                   </li>
 
                   <li>
-                    <form action="#">
-                      <button
-                        type="submit"
-                        className="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                      >
-                        Logout
-                      </button>
-                    </form>
+                    <button
+                      type="submit"
+                      className="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+                      onClick={() => {
+                        logout();
+                        router.push("/login");
+                      }}
+                    >
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </details>

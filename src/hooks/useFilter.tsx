@@ -1,21 +1,48 @@
-// import { useContext } from 'react'
-// import { Product } from '@/types/ProductType.js'
-// import { FiltersContext } from '@/context/Filters'
+"use client";
+import { useContext } from "react";
+import { Product } from "@/types/ProductType.js";
+import { FiltersContext } from "@/context/Filters";
 
-// export function useFilters () {
-//   const { filters, setFilters } = useContext(FiltersContext)
+export function useFilters() {
+  const filtersContext = useContext(FiltersContext);
 
-//   const filterProducts = (products: Product) => {
-//     return products.filter(product: Product => {
-//       return (
-//         product.price >= filters.minPrice &&
-//         (
-//           filters.category === 'all' ||
-//           product.category === filters.category
-//         )
-//       )
-//     })
-//   }
+  if (!filtersContext) {
+    return;
+  }
 
-//   return { filters, filterProducts, setFilters }
-// }
+  const { filters, setFilters } = filtersContext;
+
+  const filteredProducts = (products: Product[]) => {
+    return products.filter((product: Product) => {
+      if (
+        filters.categoryFilter &&
+        product.category !== filters.categoryFilter
+      ) {
+        return false;
+      }
+
+      if (
+        filters.priceFilter &&
+        product.price > parseFloat(filters.priceFilter)
+      ) {
+        return false;
+      }
+
+      if (
+        filters.title &&
+        !product.title.toLowerCase().includes(filters.title.toLowerCase())
+      ) {
+        return false;
+      }
+
+      if (
+        filters.availability &&
+        product.availability !== (filters.availability === "available")
+      ) {
+        return false;
+      }
+      return true;
+    });
+  };
+  return { filters, filteredProducts, setFilters };
+}
