@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: Props) => {
       if (data.length > 0) {
         const myUser = {
           ...data[0],
-          role: Role.ADMIN,
+          role: Role.USER,
         };
         setUser(myUser);
         setIsAuthenticated(true);

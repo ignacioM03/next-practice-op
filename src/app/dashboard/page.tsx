@@ -7,7 +7,7 @@ export default function DashboardPage() {
   return user ? (
     <StoreHero user={user} />
   ) : (
-    <div className="container mx-auto">
+    <div className="container mx-auto mt-5">
       <p>Loading...</p>
     </div>
   );

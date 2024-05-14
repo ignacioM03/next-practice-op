@@ -1,7 +1,12 @@
+"use client";
+import { useAuth } from "@/context/UseAuth";
 import React from "react";
 
 export const Footer = () => {
-  return (
+  const { user } = useAuth();
+  return user?.role === "admin" ? (
+    <></>
+  ) : (
     <footer className="bg-white">
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">

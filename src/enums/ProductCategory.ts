@@ -1,15 +1,3 @@
-export interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  category: ProductCategory;
-  image: string;
-  quantity: number;
-  userId?: string;
-  isOffer?: boolean;
-}
-
 enum ProductCategory {
   Electronics = "Electronics",
   Clothing = "Clothing",

@@ -23,7 +23,7 @@ export default function LoginPage() {
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const { username, password } = data;
-    const res = login({ username, password });
+    const res = await login({ username, password });
     if (res === undefined) return;
     const user = {
       ...(res || {}), // Ensure that res is an object before spreading it
@@ -31,7 +31,7 @@ export default function LoginPage() {
     };
 
     user.role === Role.ADMIN
-      ? router.push("/dashboard")
+      ? router.push("/")
       : router.push("/products");
   };
 

@@ -9,7 +9,7 @@ type Props = {
 export const ProductCard = ({ product }: Props) => {
   const addItem = useCartStore((state) => state.addItem);
   return (
-    <div className="group relative block overflow-hidden">
+    <div className="group relative block overflow-hidden text-white">
       <Link className="" href={`products/${product.id}`}>
         <button className=" cursor-pointer absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
           <span className="sr-only">Wishlist</span>
@@ -40,7 +40,7 @@ export const ProductCard = ({ product }: Props) => {
       </Link>
 
       <div className="relative border border-gray-100 bg-white p-6">
-        <span className="whitespace-nowrap bg-yellow-400 px-3 py-1.5 text-xs font-medium">
+        <span className="whitespace-nowrap bg-teal-600 px-3 py-1.5 text-xs font-medium">
           {" "}
           Nuevo{" "}
         </span>
@@ -53,7 +53,7 @@ export const ProductCard = ({ product }: Props) => {
 
         <div className="mt-4">
           <button
-            className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105"
+            className="block w-full rounded bg-teal-600 p-4 text-sm font-medium transition hover:scale-105"
             onClick={() => addItem(product)}
           >
             Add to Cart
