@@ -2,13 +2,14 @@
 
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
 import { useAuth } from "@/context/UseAuth";
+import { useRouter } from "next/navigation";
 import {  useState } from "react";
 
 export default function CheckoutPage() {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [hidden, setHidden] = useState(true);
-
+  const router = useRouter();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("submit");
@@ -184,12 +185,13 @@ export default function CheckoutPage() {
             <button
               type="button"
               className="px-6 py-3.5 text-sm bg-transparent border-2 text-[#333] rounded-md hover:bg-gray-100"
+              onClick={() => router.back()}
             >
               Paga después
             </button>
             <button
               type="button"
-              className="px-6 py-3.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="px-6 py-3.5 text-sm bg-teal-600 text-white rounded-md hover:bg-teal-700"
               onClick={handleSubmit}
             >
               Pagar ahora

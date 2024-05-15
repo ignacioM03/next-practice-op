@@ -3,11 +3,24 @@ import { useCartStore } from "@/store/CartStore";
 import Image from "next/image";
 import React from "react";
 import { OrderCard } from "../OrderCard/OrderCard";
+import { Product } from "@/types/ProductType";
 
 type OrderProps = {};
 
 export const OrderSummary = () => {
   const items = useCartStore((state) => state.items);
+
+  const total = items.reduce(
+    (total: number, item: Product) =>
+      total + parseFloat((item.price * item.quantity!).toString()),
+    0
+  );
+  const myTotal = {
+    subtotal: 0,
+    vat: 0,
+    discount: 0,
+    total: total,
+  };
   return (
     <section className="py-24 relative">
       <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
@@ -22,19 +35,19 @@ export const OrderSummary = () => {
           <div className="flex flex-col lg:flex-row lg:items-center justify-between px-6 pb-6 border-b border-gray-200">
             <div className="data">
               <p className="font-semibold text-base leading-7 text-black">
-                Order Id:{" "}
-                <span className="text-indigo-600 font-medium">#10234987</span>
+                Orden Id:{" "}
+                <span className="text-teal-600 font-medium">#10234987</span>
               </p>
               <p className="font-semibold text-base leading-7 text-black mt-4">
-                Order Payment :{" "}
+                Orden de pago :{" "}
                 <span className="text-gray-400 font-medium">
                   {" "}
                   18th march 2021
                 </span>
               </p>
             </div>
-            <button className="rounded-full py-3 px-7 font-semibold text-sm leading-7 text-white bg-indigo-600 max-lg:mt-5 shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-400">
-              Track Your Order
+            <button className="rounded-full py-3 px-7 font-semibold text-sm leading-7 text-white bg-teal-600 max-lg:mt-5 shadow-sm shadow-transparent transition-all duration-500 hover:bg-teal-700 hover:shadow-indigo-400">
+              Rastrea tu orden
             </button>
           </div>
           <div className="w-full px-3 min-[400px]:px-6">
@@ -60,15 +73,16 @@ export const OrderSummary = () => {
                     strokeLinecap="round"
                   />
                 </svg>
-                Cancel Order
+                Cancelar orden
               </button>
               <p className="font-medium text-lg text-gray-900 pl-6 py-3 max-lg:text-center">
-                Paid using Credit Card{" "}
-                <span className="text-gray-500">ending with 8822</span>
+                Pagado con tarjeta de crédito{" "}
+                <span className="text-gray-500">terminando en 8822</span>
               </p>
             </div>
             <p className="font-semibold text-lg text-black py-6">
-              Total Price: <span className="text-indigo-600"> $200.00</span>
+              Precio total:{" "}
+              <span className="text-indigo-600"> {myTotal.total}</span>
             </p>
           </div>
         </div>
