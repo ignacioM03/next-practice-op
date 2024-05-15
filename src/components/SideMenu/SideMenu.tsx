@@ -16,10 +16,11 @@ export const SideMenu = ({ page, user }: SideBarProps) => {
       {user?.role === "admin" && (
         <AdminDashboard user={user} page={currentPage} />
       )}
-      {user?.role === "user" ||
+      <UserHome page={currentPage} enable={enable} />
+      {/* {user?.role === "user" ||
         (page === "principal" && (
           <UserHome page={currentPage} enable={enable} />
-        ))}
+        ))} */}
       {/* {userType === "user" && page === "secundario" && <MenuSecundario />} */}
     </>
   );

@@ -1,8 +1,14 @@
 import { useFilters } from "@/hooks/useFilter";
 import Link from "next/link";
+import { ShoppingCartModal } from "../ShoppingCartModal/ShoppingCartModal";
+import { useState } from "react";
 
 type CartIconProps = {
   items: any;
+};
+
+type FavItemsProps = {
+  favorites: number;
 };
 
 export const SearchIconSvg = () => {
@@ -18,9 +24,14 @@ export const SearchIconSvg = () => {
   );
 };
 
-export const FavoriteIconSvg = () => {
+export const FavoriteIconSvg = ({ favorites }: FavItemsProps) => {
+  const [open, setOpen] = useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
   return (
-    <span className="relative">
+    <span className="relative" onClick={handleClick}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
@@ -33,7 +44,10 @@ export const FavoriteIconSvg = () => {
         />
       </svg>
       <span className="absolute left-auto -ml-1 top-0 rounded-full bg-black px-1 py-0 text-xs text-white">
-        1
+        {favorites}
+        <div className="" hidden={open}>
+          <ShoppingCartModal />
+        </div>
       </span>
     </span>
   );

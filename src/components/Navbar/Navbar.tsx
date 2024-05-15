@@ -17,11 +17,14 @@ import {
   ShoesIconSvg,
 } from "../IconsSvg/IconsSvg";
 import Image from "next/image";
+import { useFavItems } from "@/context/FavItems";
 
 export default function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
   //const products = useProductStore((state) => state.products);
   const items = useCartStore((state) => state.items);
+  const { state } = useFavItems();
+  const favItems = state.items.length;
   const enable = isAuthenticated && user?.role === Role.ADMIN;
   return (
     <header
@@ -50,7 +53,7 @@ export default function Navbar() {
         <div className="lg:absolute lg:right-10 flex items-center ml-auto space-x-8">
           {isAuthenticated ? (
             <>
-              <FavoriteIconSvg />
+              <FavoriteIconSvg favorites={favItems}/>
               <CartIconSvg items={items} />{" "}
               <ProfileDropdown user={user} logout={logout} />
             </>
@@ -96,7 +99,7 @@ export default function Navbar() {
             <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
               <Link
                 href="/"
-                className="hover:text-[#007bff] text-[#007bff] font-semibold block text-[15px]"
+                className="hover:text-[#0d9488] text-[#0d9488] font-semibold block text-[15px]"
               >
                 Home
               </Link>
@@ -104,7 +107,7 @@ export default function Navbar() {
             <li className="group max-lg:border-b max-lg:px-3 max-lg:py-3 relative">
               <Link
                 href="/products"
-                className="hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block"
+                className="hover:text-[#0d9488] hover:fill-[#0d9488] text-gray-600 font-semibold text-[15px] block"
               >
                 Categorias
                 <DropCategoryIconSvg />
@@ -127,7 +130,7 @@ export default function Navbar() {
             <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
               <Link
                 href="/products"
-                className="hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block"
+                className="hover:text-[#0d9488] text-gray-600 font-semibold text-[15px] block"
               >
                 Productos
               </Link>
@@ -135,7 +138,7 @@ export default function Navbar() {
             <li className="max-lg:border-b max-lg:px-3 max-lg:py-3">
               <Link
                 href="/faqs"
-                className="hover:text-[#007bff] text-gray-600 font-semibold text-[15px] block"
+                className="hover:text-[#0d9488] text-gray-600 font-semibold text-[15px] block"
               >
                 Blog
               </Link>
