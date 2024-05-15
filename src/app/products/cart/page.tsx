@@ -10,7 +10,7 @@ export default function CartPage() {
   const items = useCartStore((state) => state.items);
   const total = items.reduce(
     (total: number, item: Product) =>
-      total + parseFloat((item.price * item.quantity).toString()),
+      total + parseFloat((item.price * item.quantity!).toString()),
     0
   );
   const myTotal = {

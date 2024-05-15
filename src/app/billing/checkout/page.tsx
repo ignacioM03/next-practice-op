@@ -1,19 +1,29 @@
 "use client";
 
+import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
 import { useAuth } from "@/context/UseAuth";
+import {  useState } from "react";
 
 export default function CheckoutPage() {
   const { user } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [hidden, setHidden] = useState(true);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(e.target);
     console.log("submit");
+    setTimeout(() => {
+      setHidden(false);
+      setLoading(false);
+    }, 2000);
   };
 
   return (
     <div className="font-[sans-serif] bg-white p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="" hidden={ hidden}>
+        <ProgressBar loading={loading} />
+      </div>
+      <div className="max-w-4xl mx-auto" hidden={!hidden}>
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-[#333] inline-block border-b-4 border-[#333] pb-1">
             Checkout
@@ -78,7 +88,6 @@ export default function CheckoutPage() {
                     type="text"
                     placeholder="City"
                     className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    
                     value={user?.address.city}
                   />
                   <input
