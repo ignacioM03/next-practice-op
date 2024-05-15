@@ -32,14 +32,14 @@ export default function Navbar() {
       hidden={enable}
     >
       <section className="flex items-center flex-wrap lg:justify-center gap-4 py-3 sm:px-10 px-4 border-gray-200 border-b min-h-[75px]">
-        <div className="left-10 absolute z-50 bg-gray-100 flex px-4 py-3 rounded max-lg:hidden">
+        {/* <div className="left-10 absolute z-50 bg-gray-100 flex px-4 py-3 rounded max-lg:hidden">
           <SearchIconSvg />
           <input
             type="text"
             placeholder="Search..."
             className="outline-none bg-transparent w-full text-sm"
           />
-        </div>
+        </div> */}
 
         <Link href="/" className="shrink-0">
           <Image
