@@ -2,14 +2,25 @@ import { useFavItems } from "@/context/FavItems";
 import React from "react";
 import { FavItemCard } from "../FavItemCard/FavItemCard";
 import { useRouter } from "next/navigation";
+import { Product } from "@/types/ProductType";
 
 export const ShoppingCartModal = () => {
   const router = useRouter();
   const items = useFavItems().state.items;
+
+  const total = items.reduce(
+    (total: number, item: Product) =>
+      total + parseFloat((item.price * item.quantity!).toString()),
+    0
+  );
+  const myTotal = {
+    subtotal: 0,
+    vat: 0,
+    discount: 0,
+    total: total,
+  };
   return (
-    <div
-      className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]"
-    >
+    <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
       <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,14 +45,14 @@ export const ShoppingCartModal = () => {
           ))}
           <div className="flex">
             <span className="text-md font-bold text-black flex-1">Total</span>
-            <span className="text-sm font-semibold text-black">$120.49</span>
+            <span className="text-sm font-semibold text-black">${myTotal.total}</span>
           </div>
           <div className="flex max-sm:flex-col gap-4 !mt-8">
             <button
               type="button"
               className="px-6 py-2.5 w-full bg-gray-200 hover:bg-gray-300 text-black rounded-full"
             >
-              Continue shopping
+              Seguir comprando
             </button>
             <button
               type="button"
@@ -50,7 +61,7 @@ export const ShoppingCartModal = () => {
                 router.push("/billing/checkout");
               }}
             >
-              Check out
+              Verificar
             </button>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const FormModal = () => {
@@ -44,13 +45,13 @@ export const FormModal = () => {
                 </clipPath>
               </defs>
               <g
-                clip-path="url(#a)"
+                clipPath="url(#a)"
                 transform="matrix(1.33 0 0 -1.33 0 682.667)"
               >
                 <path
                   fill="none"
-                  stroke-miterlimit="10"
-                  stroke-width="40"
+                  strokeMiterlimit="10"
+                  strokeWidth="40"
                   d="M452 444H60c-22.091 0-40-17.909-40-40v-39.446l212.127-157.782c14.17-10.54 33.576-10.54 47.746 0L492 364.554V404c0 22.091-17.909 40-40 40Z"
                   data-original="#000000"
                 ></path>
@@ -82,7 +83,7 @@ export const FormModal = () => {
           </div>
           <div className="flex">
             <input type="checkbox" className="w-4" />
-            <label className="text-sm ml-4 text-[#333]">Remember me</label>
+            <label className="text-sm ml-4 text-[#333]">Acuérdate de mí</label>
           </div>
           <button
             type="button"
@@ -91,21 +92,18 @@ export const FormModal = () => {
             Sign in
           </button>
         </form>
-        <a
-          href="javascript:void(0)"
+        <Link
+          href="/"
           className="text-sm text-blue-600 font-semibold text-center mt-4 block"
         >
-          Forgot Your Password
-        </a>
+          Olvidaste tu contraseña
+        </Link>
         <hr className="my-6" />
         <p className="text-sm text-center text-[#333]">
-          Don't Have a Account?{" "}
-          <a
-            href="javascript:void(0)"
-            className="text-sm text-blue-600 font-semibold"
-          >
+          ¿No tienes una cuenta?{" "}
+          <Link href="/" className="text-sm text-blue-600 font-semibold">
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
