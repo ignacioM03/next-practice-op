@@ -48,11 +48,10 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
   });
   const { user } = useAuth();
   const onSubmit: SubmitHandler<Product> = (data) => {
-    console.log(data);
     if (product) {
       const body = {
         ...data,
-        category: data.category.toString(),
+        category: data.category!.toString(),
         id: product.id,
         userId: user?.id,
       };
@@ -61,7 +60,7 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
     } else {
       const body = {
         ...data,
-        category: data.category.toString(),
+        category: data.category!.toString(),
         id: Date.now().toString(),
         userId: user?.id,
       };
@@ -327,9 +326,8 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
                             className="size-5 rounded border-gray-300"
                             //key={category}
                             value={category}
-                            {...register("category", {
+                            {...register(`category`, {
                               required: true,
-                              value:selectedCategories
                             })}
                             onClick={handleChangeCategory}
                           />

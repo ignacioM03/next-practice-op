@@ -84,5 +84,5 @@ export const ProductValidate = yup.object().shape({
     .required("La cantidad es requerida")
     .min(0, "La cantidad debe ser mayor a 0"),
   image: yup.string().trim().required("La imagen es requerida"),
-  //category: yup.string().required("La categoria es requerida"),
+  category: yup.array().required("La categoría es requerida"),
 });
