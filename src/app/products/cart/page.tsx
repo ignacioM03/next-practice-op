@@ -4,6 +4,7 @@ import { ItemCard } from "@/components/ItemCard/ItemCard";
 import { StepComponent } from "@/components/StepComponent/StepComponent";
 import { TotalCard } from "@/components/TotalCard/TotalCard";
 import { useCartStore } from "@/store/CartStore";
+import { useOrderStore } from "@/store/OrderStore";
 import { Product } from "@/types/ProductType";
 
 export default function CartPage() {

@@ -4,12 +4,19 @@ import Image from "next/image";
 import React from "react";
 import { OrderCard } from "../OrderCard/OrderCard";
 import { Product } from "@/types/ProductType";
+import { useOrderStore } from "@/store/OrderStore";
+import { useAuth } from "@/context/UseAuth";
 
 type OrderProps = {};
 
 export const OrderSummary = () => {
+  const { user } = useAuth();
   const items = useCartStore((state) => state.items);
+  const orders = useOrderStore((state) => state.orders);
 
+  const myOrder = orders.filter((order) => order.user.email === user?.email)[0];
+
+  console.log(myOrder);
   const total = items.reduce(
     (total: number, item: Product) =>
       total + parseFloat((item.price * item.quantity!).toString()),
@@ -36,7 +43,7 @@ export const OrderSummary = () => {
             <div className="data">
               <p className="font-semibold text-base leading-7 text-black">
                 Orden Id:{" "}
-                <span className="text-teal-600 font-medium">#10234987</span>
+                <span className="text-teal-600 font-medium">#{myOrder.id}</span>
               </p>
               <p className="font-semibold text-base leading-7 text-black mt-4">
                 Orden de pago :{" "}
@@ -51,7 +58,7 @@ export const OrderSummary = () => {
             </button>
           </div>
           <div className="w-full px-3 min-[400px]:px-6">
-            {items.map((item) => (
+            {myOrder.items.map((item) => (
               <OrderCard order={item} key={item.id} />
             ))}
           </div>
@@ -82,7 +89,7 @@ export const OrderSummary = () => {
             </div>
             <p className="font-semibold text-lg text-black py-6">
               Precio total:{" "}
-              <span className="text-indigo-600"> {myTotal.total}</span>
+              <span className="text-indigo-600"> {myOrder.total}</span>
             </p>
           </div>
         </div>

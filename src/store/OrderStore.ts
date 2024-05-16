@@ -7,6 +7,9 @@ interface State {
   getOrder: (id: string) => OrderType | undefined;
   removeOrder: (id: string) => void;
   updateOrder: (order: OrderType) => void;
+  totalOrders: number;
+  totalAmount: number;
+  //totalItems: number;
 }
 
 export const useOrderStore = create<State>((set) => ({
@@ -20,4 +23,7 @@ export const useOrderStore = create<State>((set) => ({
   },
   removeOrder: (id: string) => set((state) => ({ orders: state.orders })),
   updateOrder: (order: OrderType) => set((state) => ({ orders: state.orders })),
+  totalOrders: 0,
+  totalAmount: 0,
+  //totalItems: () => useOrderStore.getState().orders.length,
 }));

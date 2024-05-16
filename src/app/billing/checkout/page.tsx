@@ -2,14 +2,37 @@
 
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
 import { useAuth } from "@/context/UseAuth";
+import { useCartStore } from "@/store/CartStore";
+import { useOrderStore } from "@/store/OrderStore";
+import { Product } from "@/types/ProductType";
 import { useRouter } from "next/navigation";
-import {  useState } from "react";
+import { useState } from "react";
 
 export default function CheckoutPage() {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [hidden, setHidden] = useState(true);
+  const addOrder = useOrderStore((state) => state.addOrder);
+  const items = useCartStore((state) => state.items);
+  const clearCart = useCartStore((state) => state.clearCart);
   const router = useRouter();
+
+  const totalOrder = items.reduce(
+    (total: number, item: Product) =>
+      total + parseFloat((item.price * item.quantity!).toString()),
+    0
+  );
+
+  const handleCreateOrder = () => {
+    addOrder({
+      id: Date.now().toString(),
+      user: user!,
+      items: items,
+      total: totalOrder,
+    });
+    //router.push("/order");
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("submit");
@@ -17,17 +40,19 @@ export default function CheckoutPage() {
       setHidden(false);
       setLoading(false);
     }, 2000);
+    handleCreateOrder();
+    clearCart();
   };
 
   return (
-    <div className="font-[sans-serif] bg-white p-4">
-      <div className="" hidden={ hidden}>
+    <div className="font-[sans-serif] bg-white p-4 mt-5">
+      <div className="" hidden={hidden}>
         <ProgressBar loading={loading} />
       </div>
       <div className="max-w-4xl mx-auto" hidden={!hidden}>
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-[#333] inline-block border-b-4 border-[#333] pb-1">
-            Checkout
+            Verificar Page
           </h2>
         </div>
         <div className="mt-12">
@@ -73,7 +98,7 @@ export default function CheckoutPage() {
             <div>
               <h3 className="text-xl font-bold text-[#333]"></h3>
               <h3 className="text-xl font-bold text-[#333]">
-                Shopping Address
+                Dirección de envio
               </h3>
             </div>
             <div className="md:col-span-2">

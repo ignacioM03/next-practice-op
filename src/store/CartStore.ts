@@ -7,6 +7,7 @@ interface State {
   removeItem: (id: string) => void;
   loading: boolean;
   error: string | null;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<State>((set) => ({
@@ -19,4 +20,5 @@ export const useCartStore = create<State>((set) => ({
     set((state) => ({
       items: state.items.filter((item: Product) => item.id !== id),
     })),
+  clearCart: () => set({ items: [] }),
 }));

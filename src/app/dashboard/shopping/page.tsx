@@ -1,4 +1,10 @@
+import { useOrderStore } from "@/store/OrderStore";
+import { calculateTotalOrders, countTotalItems } from "@/utils/utils";
+
 export default function ShoppingPage() {
+  const orders = useOrderStore((state) => state.orders);
+  const amount = calculateTotalOrders(orders);
+  const sellingItems = countTotalItems(orders);
   return (
     <div className="container mx-auto bg-gray-50 my-1 mt-10 mb-10">
       <section className="bg-white">
@@ -23,7 +29,7 @@ export default function ShoppingPage() {
                 </dt>
 
                 <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                  $4.8m
+                  ${amount}
                 </dd>
               </div>
 
@@ -33,7 +39,7 @@ export default function ShoppingPage() {
                 </dt>
 
                 <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                  24
+                  {orders.length}
                 </dd>
               </div>
 
@@ -43,7 +49,7 @@ export default function ShoppingPage() {
                 </dt>
 
                 <dd className="text-4xl font-extrabold text-blue-600 md:text-5xl">
-                  86
+                  {sellingItems}
                 </dd>
               </div>
             </dl>
