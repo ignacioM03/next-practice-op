@@ -1,12 +1,8 @@
 "use client";
 import { UserType } from "@/types/UserType";
-import Link from "next/link";
 import { NewProductModal } from "../NewProductModal/NewProductModal";
 import { useState } from "react";
 import { useProductStore } from "@/store/Products";
-import { ProductCard } from "../ProductCard/ProductCard";
-import { useAuth } from "@/context/UseAuth";
-import { Divider } from "@nextui-org/react";
 import { BlurryDivider } from "../BlurryDivider/BlurryDivider";
 import { ProductTable } from "../ProductTable/ProductTable";
 
@@ -93,11 +89,7 @@ export const StoreHero = ({ user }: ProfileProps) => {
         </p>
         <hr />
         <ProductTable />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {/* {filterProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))} */}
-        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </header>
   );

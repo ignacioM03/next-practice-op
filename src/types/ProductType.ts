@@ -15,6 +15,7 @@ export interface Product {
   thumbnail?: string;
   isOffer?: boolean;
   sales?: number;
+  status?: string;
 }
 
 enum ProductCategory {

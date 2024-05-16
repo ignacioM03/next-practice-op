@@ -37,22 +37,22 @@ export const ProductTable = () => {
               </label>
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
-              Product
+              Producto
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
-              Price
+              Precio
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
-              In stock
+              en stock
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
-              Sales
+              En venta
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
               Rating
             </th>
             <th className="px-6 py-5 text-left text-sm font-semibold text-black">
-              Action
+              Acciones
             </th>
           </tr>
         </thead>

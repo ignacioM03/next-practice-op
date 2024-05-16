@@ -8,6 +8,7 @@ interface State {
   error: string | null;
   getProduct: (id: string) => Product | undefined;
   removeProduct: (id: string) => void;
+  updateProduct: (product: Product) => void;
 }
 
 export const useProductStore = create<State>((set) => ({

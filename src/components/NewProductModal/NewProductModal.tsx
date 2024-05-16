@@ -4,35 +4,60 @@ import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
 import { ProductValidate } from "@/utils/validateForm";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useParams } from "next/navigation";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type ModalProps = {
   setOpen: any;
+  product?: Product;
 };
-export const NewProductModal = ({ setOpen }: ModalProps) => {
+export const NewProductModal = ({ product, setOpen }: ModalProps) => {
+  const { id } = useParams();
   const addProduct = useProductStore((state) => state.addProduct);
+  const onEdit = useProductStore((state) => state.updateProduct);
+
+  const handleModalClick = (e: any) => {
+    e.stopPropagation();
+  };
 
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(ProductValidate),
   });
   const { user } = useAuth();
   const onSubmit: SubmitHandler<Product> = (data) => {
-    const body = {
-      ...data,
-      id: Date.now().toString(),
-      userId: user?.id,
-    };
-    addProduct(body);
+    if (product) {
+      const body = {
+        ...data,
+        id: product.id,
+        userId: user?.id,
+      };
+      onEdit(body);
+    } else {
+      const body = {
+        ...data,
+        id: Date.now().toString(),
+        userId: user?.id,
+      };
+      addProduct(body);
+      reset();
+    }
   };
 
   return (
-    <div className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-      <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative">
+    <div
+      className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000]   before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]"
+      onClick={handleModalClick}
+    >
+      <div
+        className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         <h4 className="text-md font-bold text-black mt-6">Items</h4>
         <div className="space-y-6 mt-6">
           <form
@@ -64,7 +89,8 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 type="text"
                 id="title"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
-                placeholder="Name..."
+                placeholder="Nombre..."
+                defaultValue={product?.title}
                 {...register("title", { required: true, maxLength: 30 })}
               />
               {errors.title && (
@@ -98,6 +124,7 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 id="description"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
                 placeholder="Descripcion ..."
+                defaultValue={product?.description}
                 {...register("description", { required: true, maxLength: 30 })}
               />
               {errors.description && (
@@ -131,6 +158,7 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 id="price"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
                 placeholder="Precio..."
+                defaultValue={product?.price}
                 {...register("price", { required: true, maxLength: 4 })}
               />
               {errors.price && (
@@ -164,6 +192,7 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 id="quantity"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
                 placeholder="Cantidad..."
+                defaultValue={product?.quantity}
                 {...register("quantity", { required: true, maxLength: 4 })}
               />
               {errors.quantity && (
@@ -197,6 +226,7 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 id="image"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
                 placeholder="Imagen..."
+                defaultValue={product?.image}
                 {...register("image", { required: true })}
               />
               {errors.image && (
@@ -230,6 +260,7 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
                 id="category"
                 className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
                 placeholder="Categoria"
+                defaultValue={product?.category}
                 {...register("category", { required: true })}
               />
               {errors.category && (
@@ -246,12 +277,21 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
               >
                 Cancelar
               </button>
-              <button
-                type="submit"
-                className="px-6 py-2.5 w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full"
-              >
-                Agregar Producto
-              </button>
+              {product ? (
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full"
+                >
+                  Actualizar Producto
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 w-full bg-teal-600 hover:bg-teal-700 text-white rounded-full"
+                >
+                  Agregar Producto
+                </button>
+              )}
             </div>
           </form>
         </div>
