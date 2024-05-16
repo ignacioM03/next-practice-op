@@ -14,9 +14,10 @@ import {
 
 type UserProps = {
   user: UserType | null;
+  setCurrentPage?: (page: string) => void;
 };
 
-export const SideBar = ({ user }: UserProps) => {
+export const SideBar = ({ setCurrentPage, user }: UserProps) => {
   const { logout } = useAuth();
   const router = useRouter();
 
@@ -24,6 +25,11 @@ export const SideBar = ({ user }: UserProps) => {
     logout();
     router.push("/login");
   };
+
+  const handleChangePage = (page: string) => {
+    setCurrentPage?.(page);
+  };
+
   return (
     // <div classNameNameName="">
     //   <h1 classNameNameName="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
@@ -198,22 +204,31 @@ export const SideBar = ({ user }: UserProps) => {
       </div>
 
       <hr className="mt-6 border-gray-600" />
-
       <ul className="space-y-3 mt-8">
         <li>
-          <DashboardIconSvg />
+          <button onClick={() => handleChangePage("dashboard")}>
+            <DashboardIconSvg />
+          </button>
+        </li>
+        <li key={"prices"} value={"prices"}>
+          <button onClick={() => handleChangePage("prices")}>
+            <AudienceIconSvg />
+          </button>
         </li>
         <li>
-          <AudienceIconSvg />
+          <button onClick={() => handleChangePage("shopping")}>
+            <ProductsIconSvg />
+          </button>
         </li>
         <li>
-          <ProductsIconSvg />
+          <button onClick={() => handleChangePage("orders")}>
+            <SchedulesIconSvg />
+          </button>
         </li>
         <li>
-          <SchedulesIconSvg />
-        </li>
-        <li>
-          <NotificationsIconSvg />
+          <button onClick={() => handleChangePage("shipping")}>
+            <NotificationsIconSvg />
+          </button>
         </li>
       </ul>
 

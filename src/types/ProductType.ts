@@ -16,6 +16,9 @@ export interface Product {
   isOffer?: boolean;
   sales?: number;
   status?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  updatedBy?: string;
 }
 
 enum ProductCategory {

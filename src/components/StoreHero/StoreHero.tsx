@@ -2,7 +2,6 @@
 import { UserType } from "@/types/UserType";
 import { NewProductModal } from "../NewProductModal/NewProductModal";
 import { useState } from "react";
-import { useProductStore } from "@/store/Products";
 import { BlurryDivider } from "../BlurryDivider/BlurryDivider";
 import { ProductTable } from "../ProductTable/ProductTable";
 
@@ -12,11 +11,6 @@ type ProfileProps = {
 
 export const StoreHero = ({ user }: ProfileProps) => {
   const [open, setOpen] = useState(true);
-  const products = useProductStore((state) => state.products);
-
-  const filterProducts = products.filter(
-    (product) => product.userId === user?.id
-  );
 
   const handleClick = () => {
     setOpen(!open);

@@ -45,8 +45,12 @@ export const AuthProvider = ({ children }: Props) => {
       if (data.length > 0) {
         const myUser = {
           ...data[0],
-          role: Role.ADMIN,
+          role: Role.USER,
         };
+        if(myUser.id === 1){
+          myUser.role = Role.ADMIN
+          setUser(myUser);
+        }
         setUser(myUser);
         setIsAuthenticated(true);
       }
@@ -93,7 +97,6 @@ export const AuthProvider = ({ children }: Props) => {
       setErrors(error.response.data);
     }
   };
-
 
   const value = {
     login,

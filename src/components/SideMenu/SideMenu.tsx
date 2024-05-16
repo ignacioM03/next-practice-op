@@ -2,6 +2,7 @@
 import { UserType } from "@/types/UserType";
 import { AdminDashboard } from "../AdminDashboard/DashboardAdmin";
 import { UserHome } from "../UserHome/UserHome";
+import { useState } from "react";
 
 type SideBarProps = {
   user: UserType | null;
@@ -9,14 +10,14 @@ type SideBarProps = {
 };
 
 export const SideMenu = ({ page, user }: SideBarProps) => {
-  const currentPage = "dashboard";
+  const currenPage = "dashboard";
   const enable = user?.role === "admin";
   return (
     <>
       {user?.role === "admin" && (
-        <AdminDashboard user={user} page={currentPage} />
+        <AdminDashboard user={user} page={currenPage} />
       )}
-      <UserHome page={currentPage} enable={enable} />
+      <UserHome page={currenPage} enable={enable} />
       {/* {user?.role === "user" ||
         (page === "principal" && (
           <UserHome page={currentPage} enable={enable} />

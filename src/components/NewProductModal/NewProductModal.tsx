@@ -17,7 +17,6 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
   const { id } = useParams();
   const [countSelected, setCountSelected] = useState(0);
   const [categories] = useState(productCategories);
-  const [selectedCategories, setSelectedCategories] = useState<string>("");
   const addProduct = useProductStore((state) => state.addProduct);
   const onEdit = useProductStore((state) => state.updateProduct);
 
@@ -26,14 +25,11 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
   };
 
   const handleChangeCategory = (event: any) => {
-    const category = event.target.value;
-    console.log(category);
+    //const category = event.target.value;
     const isChecked = event.target.checked;
     if (isChecked) {
-      setSelectedCategories(category);
       setCountSelected(countSelected + 1);
     } else {
-      setSelectedCategories("");
       setCountSelected(countSelected - 1);
     }
   };
@@ -54,8 +50,11 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
         category: data.category!.toString(),
         id: product.id,
         userId: user?.id,
+        sales: 0,
+        createdAt: product.createdAt,
+        updatedAt: new Date(),
+        updatedBy: user?.name,
       };
-      console.log(body);
       onEdit(body);
     } else {
       const body = {
@@ -63,8 +62,9 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
         category: data.category!.toString(),
         id: Date.now().toString(),
         userId: user?.id,
+        sales: 0,
+        createdAt: new Date(),
       };
-      console.log(body);
       addProduct(body);
       reset();
     }
