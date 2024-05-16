@@ -16,7 +16,7 @@ export default function NewProductPage() {
       quantity: e.target.quantity.value || "",
       description: e.target.description.value || "",
       category: "",
-      id: Date.now(),
+      id: Date.now().toString(),
       userId: user?.id,
     };
     addProduct(product);

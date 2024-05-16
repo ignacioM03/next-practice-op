@@ -12,7 +12,7 @@ type ModalProps = {
 };
 export const NewProductModal = ({ setOpen }: ModalProps) => {
   const addProduct = useProductStore((state) => state.addProduct);
-  
+
   const {
     handleSubmit,
     register,
@@ -24,11 +24,10 @@ export const NewProductModal = ({ setOpen }: ModalProps) => {
   const onSubmit: SubmitHandler<Product> = (data) => {
     const body = {
       ...data,
-      userId: user?.id,
       id: Date.now().toString(),
+      userId: user?.id,
     };
     addProduct(body);
-    console.log(body);
   };
 
   return (

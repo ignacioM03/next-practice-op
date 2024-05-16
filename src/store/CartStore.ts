@@ -4,7 +4,7 @@ import { create } from "zustand";
 interface State {
   items: Product[];
   addItem: (item: Product) => void;
-  removeItem: (id: number) => void;
+  removeItem: (id: string) => void;
   loading: boolean;
   error: string | null;
 }
@@ -15,7 +15,7 @@ export const useCartStore = create<State>((set) => ({
   error: null,
   addItem: (item: Product) =>
     set((state) => ({ items: [...state.items, item] })),
-  removeItem: (id: number) =>
+  removeItem: (id: string) =>
     set((state) => ({
       items: state.items.filter((item: Product) => item.id !== id),
     })),

@@ -1,7 +1,10 @@
 "use client";
+import { useFavItems } from "@/context/FavItems";
 import { useAuth } from "@/context/UseAuth";
+import { HandleFavItemAction } from "@/hooks/FavItemReducer";
 import { useCartStore } from "@/store/CartStore";
 import { useProductStore } from "@/store/Products";
+import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -10,8 +13,9 @@ export default function ProductPage() {
   const { id } = useParams();
   const addItem = useCartStore((state) => state.addItem);
   const { isAuthenticated } = useAuth();
-  const product = useProductStore((state) => state.getProduct(parseInt(id)));
+  const product = useProductStore((state) => state.getProduct(id));
   const [quantity, setQuantity] = useState(1);
+  const { dispatch } = useFavItems();
 
   const handleAddItem = () => {
     if (product) {
@@ -21,6 +25,10 @@ export default function ProductPage() {
       };
       addItem(newItem);
     }
+  };
+
+  const addFavoriteItem = (item: Product) => {
+    dispatch({ type: HandleFavItemAction.ADD_FAV_ITEM, payload: item });
   };
   return (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -192,7 +200,12 @@ export default function ProductPage() {
               >
                 Agregar al carrito
               </button>
-              <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              <button
+                className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                onClick={() => {
+                  addFavoriteItem(product!);
+                }}
+              >
                 <svg
                   fill="currentColor"
                   strokeLinecap="round"

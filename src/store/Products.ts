@@ -6,13 +6,14 @@ interface State {
   addProduct: (product: Product) => void;
   loading: boolean;
   error: string | null;
-  getProduct: (id: number) => Product | undefined;
+  getProduct: (id: string) => Product | undefined;
+  removeProduct: (id: string) => void;
 }
 
 export const useProductStore = create<State>((set) => ({
   products: [
     {
-      id: 2,
+      id: "2",
       title: "product 2",
       price: 24,
       description: "description",
@@ -22,7 +23,7 @@ export const useProductStore = create<State>((set) => ({
       quantity: 1,
     },
     {
-      id: 3,
+      id: "3",
       title: "product 3",
       price: 28,
       description: "description",
@@ -32,7 +33,7 @@ export const useProductStore = create<State>((set) => ({
       quantity: 1,
     },
     {
-      id: 1,
+      id: "1",
       title: "product 1",
       price: 2,
       description: "description",
@@ -42,7 +43,7 @@ export const useProductStore = create<State>((set) => ({
       quantity: 1,
     },
     {
-      id: 4,
+      id: "4",
       title: "product 4",
       price: 15,
       description: "description",
@@ -59,7 +60,7 @@ export const useProductStore = create<State>((set) => ({
   setError: (error: string | null) => set({ error }),
   addProduct: (product: Product) =>
     set((state) => ({ products: [...state.products, product] })),
-  removeProduct: (id: number) =>
+  removeProduct: (id: string) =>
     set((state) => ({
       products: state.products.filter((product: Product) => product.id !== id),
     })),
@@ -70,7 +71,7 @@ export const useProductStore = create<State>((set) => ({
       ),
     })),
   clearProducts: () => set({ products: [] }),
-  getProduct: (id: number): Product | undefined => {
+  getProduct: (id: string): Product | undefined => {
     return useProductStore
       .getState()
       .products.find((product: Product) => product.id === id);

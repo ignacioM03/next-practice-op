@@ -6,6 +6,9 @@ import { useState } from "react";
 import { useProductStore } from "@/store/Products";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { useAuth } from "@/context/UseAuth";
+import { Divider } from "@nextui-org/react";
+import { BlurryDivider } from "../BlurryDivider/BlurryDivider";
+import { ProductTable } from "../ProductTable/ProductTable";
 
 type ProfileProps = {
   user: UserType | null;
@@ -23,7 +26,7 @@ export const StoreHero = ({ user }: ProfileProps) => {
     setOpen(!open);
   };
   return (
-    <header className="container mx-auto bg-gray-50 my-1">
+    <header className="container mx-auto bg-gray-50 my-1 mt-10 mb-10">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="text-center sm:text-left">
@@ -75,9 +78,9 @@ export const StoreHero = ({ user }: ProfileProps) => {
           </div>
         </div>
       </div>
-      <div className="mt-12 ">
-        <h2 className="text-center text-xl font-bold">Mis Productos</h2>
-        <p className="text-justify">
+      <div className="container mt-12 ">
+        <BlurryDivider text={"Administrar Productos"} />
+        <p className="text-justify my-10 mx-24">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis
           veniam dicta quisquam tenetur officiis nulla nobis earum sunt fugiat!
           Voluptas, dolorum? Incidunt enim ex architecto quod, provident
@@ -87,14 +90,13 @@ export const StoreHero = ({ user }: ProfileProps) => {
           debitis ullam voluptates quia similique. Possimus temporibus aliquid
           pariatur obcaecati, quasi voluptate nesciunt delectus est nihil odio
           excepturi optio quod fugiat consequatur saepe eos dolorem, alias
-          similique. Repellendus magni deserunt tenetur ab vel veniam eius
-          facilis qui, beatae deleniti earum neque dolorem porro ipsum ex
-          molestias quas error. Libero, nostrum.
         </p>
+        <hr />
+        <ProductTable />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filterProducts.map((product) => (
+          {/* {filterProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
-          ))}
+          ))} */}
         </div>
       </div>
     </header>

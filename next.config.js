@@ -36,6 +36,8 @@ module.exports = {
       "readymadeui.com/readymadeui.svg",
       "readymadeui.com",
       "pagedone.io",
+      "http2.mlstatic.com",
+      
     ],
     remotePatterns: [
       {
