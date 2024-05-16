@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/context/UseAuth";
+import { productCategories } from "@/enums/ProductCategory";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
 import { ProductValidate } from "@/utils/validateForm";
@@ -14,11 +15,27 @@ type ModalProps = {
 };
 export const NewProductModal = ({ product, setOpen }: ModalProps) => {
   const { id } = useParams();
+  const [countSelected, setCountSelected] = useState(0);
+  const [categories] = useState(productCategories);
+  const [selectedCategories, setSelectedCategories] = useState<string>("");
   const addProduct = useProductStore((state) => state.addProduct);
   const onEdit = useProductStore((state) => state.updateProduct);
 
   const handleModalClick = (e: any) => {
     e.stopPropagation();
+  };
+
+  const handleChangeCategory = (event: any) => {
+    const category = event.target.value;
+    console.log(category);
+    const isChecked = event.target.checked;
+    if (isChecked) {
+      setSelectedCategories(category);
+      setCountSelected(countSelected + 1);
+    } else {
+      setSelectedCategories("");
+      setCountSelected(countSelected - 1);
+    }
   };
 
   const {
@@ -31,19 +48,24 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
   });
   const { user } = useAuth();
   const onSubmit: SubmitHandler<Product> = (data) => {
+    console.log(data);
     if (product) {
       const body = {
         ...data,
+        category: data.category.toString(),
         id: product.id,
         userId: user?.id,
       };
+      console.log(body);
       onEdit(body);
     } else {
       const body = {
         ...data,
+        category: data.category.toString(),
         id: Date.now().toString(),
         userId: user?.id,
       };
+      console.log(body);
       addProduct(body);
       reset();
     }
@@ -240,7 +262,6 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
                 htmlFor="category"
                 className="flex  items-center mb-2 text-gray-600 text-sm font-medium"
               >
-                Categoria del producto{" "}
                 <svg
                   width="7"
                   height="7"
@@ -255,14 +276,74 @@ export const NewProductModal = ({ product, setOpen }: ModalProps) => {
                   />
                 </svg>
               </label>
-              <input
-                type="text"
-                id="category"
-                className="block w-full h-11 px-5 py-2.5 bg-white leading-7 text-base font-normal shadow-xs text-gray-900 bg-transparent border border-gray-300 rounded-full placeholder-gray-400 focus:outline-none "
-                placeholder="Categoria"
-                defaultValue={product?.category}
-                {...register("category", { required: true })}
-              />
+              <details className="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition">
+                  <span className="text-sm font-medium"> Categoria </span>
+
+                  <span className="transition group-open:-rotate-180">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-4 w-4"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+
+                <div className="border-t border-gray-200 bg-white">
+                  <header className="flex items-center justify-between p-4">
+                    <span className="text-sm text-gray-700">
+                      {" "}
+                      {countSelected} Selected{" "}
+                    </span>
+
+                    <button
+                      type="button"
+                      className="text-sm text-gray-900 underline underline-offset-4"
+                      //onClick={reset}
+                    >
+                      Reset
+                    </button>
+                  </header>
+
+                  <ul className="space-y-1 border-t border-gray-200 p-4">
+                    {categories.map((category: any) => (
+                      <li key={category}>
+                        <label
+                          htmlFor={"category"}
+                          className="inline-flex items-center gap-2"
+                        >
+                          <input
+                            type="checkbox"
+                            id="category"
+                            className="size-5 rounded border-gray-300"
+                            //key={category}
+                            value={category}
+                            {...register("category", {
+                              required: true,
+                              value:selectedCategories
+                            })}
+                            onClick={handleChangeCategory}
+                          />
+
+                          <span className="text-sm font-medium text-gray-700">
+                            {" "}
+                            {category}{" "}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
               {errors.category && (
                 <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
                   {errors.category.message}
