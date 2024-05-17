@@ -1,9 +1,6 @@
 "use client";
-import { useCartStore } from "@/store/CartStore";
-import Image from "next/image";
 import React from "react";
 import { OrderCard } from "../OrderCard/OrderCard";
-import { Product } from "@/types/ProductType";
 import { useOrderStore } from "@/store/OrderStore";
 import { useAuth } from "@/context/UseAuth";
 
@@ -11,23 +8,11 @@ type OrderProps = {};
 
 export const OrderSummary = () => {
   const { user } = useAuth();
-  const items = useCartStore((state) => state.items);
   const orders = useOrderStore((state) => state.orders);
-
-  const myOrder = orders.filter((order) => order.user.email === user?.email)[0];
-
-  console.log(myOrder);
-  const total = items.reduce(
-    (total: number, item: Product) =>
-      total + parseFloat((item.price * item.quantity!).toString()),
-    0
-  );
-  const myTotal = {
-    subtotal: 0,
-    vat: 0,
-    discount: 0,
-    total: total,
-  };
+  // const myOrder = orders.filter((order) => order.user.email === user?.email)[
+  //   orders.length - 1
+  // ];
+  const myOrder = orders[orders.length - 1];
   return (
     <section className="py-24 relative">
       <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">

@@ -5,6 +5,7 @@ import { useAuth } from "@/context/UseAuth";
 import { useCartStore } from "@/store/CartStore";
 import { useOrderStore } from "@/store/OrderStore";
 import { Product } from "@/types/ProductType";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -30,18 +31,17 @@ export default function CheckoutPage() {
       items: items,
       total: totalOrder,
     });
-    //router.push("/order");
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("submit");
+    handleCreateOrder();
+    clearCart();
     setTimeout(() => {
       setHidden(false);
       setLoading(false);
     }, 2000);
-    handleCreateOrder();
-    clearCart();
   };
 
   return (
@@ -58,9 +58,8 @@ export default function CheckoutPage() {
         <div className="mt-12">
           <div className="grid md:grid-cols-3 gap-6">
             <div>
-              <h3 className="text-xl font-bold text-[#333]"></h3>
               <h3 className="text-xl font-bold text-[#333]">
-                Personal Details
+                Detalles Personales
               </h3>
             </div>
             <div className="md:col-span-2">
@@ -96,7 +95,6 @@ export default function CheckoutPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 mt-12">
             <div>
-              <h3 className="text-xl font-bold text-[#333]"></h3>
               <h3 className="text-xl font-bold text-[#333]">
                 Dirección de envio
               </h3>
@@ -134,8 +132,7 @@ export default function CheckoutPage() {
           </div>
           <div className="grid md:grid-cols-3 gap-6 mt-12">
             <div>
-              <h3 className="text-xl font-bold text-[#333]"></h3>
-              <h3 className="text-xl font-bold text-[#333]">Payment method</h3>
+              <h3 className="text-xl font-bold text-[#333]">Método de pago</h3>
             </div>
             <div className="md:col-span-2">
               <div className="grid gap-6 sm:grid-cols-2">
@@ -150,20 +147,26 @@ export default function CheckoutPage() {
                     htmlFor="card"
                     className="ml-4 flex gap-2 cursor-pointer"
                   >
-                    <img
+                    <Image
                       src="https://readymadeui.com/images/visa.webp"
                       className="w-12"
                       alt="card1"
+                      width={100}
+                      height={100}
                     />
-                    <img
+                    <Image
                       src="https://readymadeui.com/images/american-express.webp"
                       className="w-12"
                       alt="card2"
+                      width={100}
+                      height={100}
                     />
-                    <img
+                    <Image
                       src="https://readymadeui.com/images/master.webp"
                       className="w-12"
                       alt="card3"
+                      width={100}
+                      height={100}
                     />
                   </label>
                 </div>
@@ -177,10 +180,12 @@ export default function CheckoutPage() {
                     htmlFor="paypal"
                     className="ml-4 flex gap-2 cursor-pointer"
                   >
-                    <img
+                    <Image
                       src="https://readymadeui.com/images/paypal.webp"
                       className="w-20"
                       alt="paypalCard"
+                      width={100}
+                      height={100}
                     />
                   </label>
                 </div>

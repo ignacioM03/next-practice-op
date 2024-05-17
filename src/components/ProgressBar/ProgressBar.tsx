@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { OrderSummary } from "../OrderSummary/OrderSummary";
 
 type ProgressBarProps = {

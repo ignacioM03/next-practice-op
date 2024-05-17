@@ -1,13 +1,23 @@
+"use client";
+import { OrderSummaryCheck } from "@/components/OrderSummaryCheck/OrderSummaryCheck";
+import { OrderTable } from "@/components/OrderTable/OrderTable";
 import { useOrderStore } from "@/store/OrderStore";
 import { calculateTotalOrders, countTotalItems } from "@/utils/utils";
+import { useState } from "react";
 
 export default function ShoppingPage() {
+  const [hidden, setHidden] = useState(true);
   const orders = useOrderStore((state) => state.orders);
   const amount = calculateTotalOrders(orders);
   const sellingItems = countTotalItems(orders);
+
+  const handleOrder = () => {
+    setHidden(!hidden);
+  };
+
   return (
     <div className="container mx-auto bg-gray-50 my-1 mt-10 mb-10">
-      <section className="bg-white">
+      <section className="bg-white" hidden={!hidden}>
         <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
@@ -56,6 +66,23 @@ export default function ShoppingPage() {
           </div>
         </div>
       </section>
+      <div className="">
+        <OrderTable
+          handleOrder={handleOrder}
+          setOpen={setHidden}
+          hidden={hidden}
+        />
+      </div>
+      {/* <button className="" onClick={handleOrder}>
+        {orders.map((order) => (
+          <div key={order.id} className=" ">
+            <p>{order.id}</p>
+            <div className="" hidden={hidden}>
+              <OrderSummaryCheck setOpen={setHidden} order={order} />
+            </div>
+          </div>
+        ))}
+      </button> */}
     </div>
   );
 }
