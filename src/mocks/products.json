@@ -46,7 +46,8 @@
             "id": "1716057825162",
             "userId": 1,
             "sales": 0,
-            "createdAt": "new Date(2024-05-18T18:43:45.000Z)"
+            "createdAt": "new Date(2024-05-18T18:43:45.000Z)",
+            "outlet": true
         },
         {
             "category": "Health",
@@ -58,7 +59,8 @@
             "id": "1716057857209",
             "userId": 1,
             "sales": 0,
-            "createdAt": "new Date(2024-05-18T18:44:17.000Z)"
+            "createdAt": "new Date(2024-05-18T18:44:17.000Z)",
+            "outlet": true
         }
     ],
     "total": 100,
