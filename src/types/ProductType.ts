@@ -19,6 +19,9 @@ export interface Product {
   createdAt?: Date;
   updatedAt?: Date;
   updatedBy?: string;
+  shipping?: Shipping;
+  dispatched?: boolean;
+  outlet?: boolean;
 }
 
 enum ProductCategory {
@@ -35,4 +38,9 @@ enum ProductCategory {
   Games = "Games",
   BooksAndMovies = "Books and Movies",
   SportsAndFitness = "Sports and Fitness",
+}
+
+enum Shipping {
+  Express = "Express",
+  Regular = "Regular",
 }

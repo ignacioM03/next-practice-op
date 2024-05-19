@@ -1,5 +1,6 @@
 import { OrderType } from "@/types/OrderType";
 import { create } from "zustand";
+import { orders as ordersMock } from "../mocks/orders.json";
 
 interface State {
   orders: OrderType[];
@@ -13,7 +14,7 @@ interface State {
 }
 
 export const useOrderStore = create<State>((set) => ({
-  orders: [],
+  orders: [...ordersMock],
   addOrder: (order: OrderType) =>
     set((state) => ({ orders: [...state.orders, order] })),
   getOrder: (id: string): OrderType | undefined => {

@@ -3,6 +3,7 @@ import React from "react";
 import { OrderCard } from "../OrderCard/OrderCard";
 import { useOrderStore } from "@/store/OrderStore";
 import { useAuth } from "@/context/UseAuth";
+import Link from "next/link";
 
 type OrderProps = {};
 
@@ -38,9 +39,12 @@ export const OrderSummary = () => {
                 </span>
               </p>
             </div>
-            <button className="rounded-full py-3 px-7 font-semibold text-sm leading-7 text-white bg-teal-600 max-lg:mt-5 shadow-sm shadow-transparent transition-all duration-500 hover:bg-teal-700 hover:shadow-indigo-400">
+            <Link
+              className="rounded-full py-3 px-7 font-semibold text-sm leading-7 text-white bg-teal-600 max-lg:mt-5 shadow-sm shadow-transparent transition-all duration-500 hover:bg-teal-700 hover:shadow-indigo-400"
+              href={`/orders/${myOrder.id}`}
+            >
               Rastrea tu orden
-            </button>
+            </Link>
           </div>
           <div className="w-full px-3 min-[400px]:px-6">
             {myOrder.items.map((item) => (

@@ -49,7 +49,7 @@ export const OrderTr = ({
       <td className="px-6 py-4 text-sm">
         <div className="flex items-center cursor-pointer">
           <Image
-            src="https://readymadeui.com/profile_4.webp"
+            src={order.user.profilePicture}
             className="w-7 h-7 rounded-full shrink-0"
             alt=""
             width={28}

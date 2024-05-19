@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { OutletProduct } from "../OutletProduct/OutletProduct";
 
 type UserHomeProps = {
   page: string;
@@ -90,6 +91,7 @@ export const UserHome = ({ page, enable }: UserHomeProps) => {
             </Link>
           </li>
         </ul>
+      <OutletProduct />
       </div>
     </section>
   );

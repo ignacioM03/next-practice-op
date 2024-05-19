@@ -75,7 +75,7 @@ export default function ProductsPage() {
           </div>
         </div>
       </div>
-      <BlurryDivider />
+      <BlurryDivider text="Ver todos los productos" />
     </section>
   );
 }

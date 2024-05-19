@@ -16,7 +16,6 @@ type ProfileProps = {
 };
 
 export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
-
   const router = useRouter();
   return user!.role === "user" ? (
     <div className="flex items-center gap-4">
@@ -40,7 +39,10 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
           </DropdownItem>
           <DropdownItem key="settings">Mi configuración</DropdownItem>
           <DropdownItem key="team_settings">
-            <Link href={"/products/cart"}>Mis compras</Link>
+            <Link href={"/products/cart"}>Cesta</Link>
+          </DropdownItem>
+          <DropdownItem key="team_settings">
+            <Link href={"/orders/"}>Mis pedidos</Link>
           </DropdownItem>
           <DropdownItem key="logout" color="danger" onClick={logout}>
             Log Out
