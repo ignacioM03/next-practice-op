@@ -28,7 +28,7 @@ export const OrderAccordionItem = ({ order }: OrderCheckCardProps) => {
         </div>
       </summary>
       <div className="px-6 pb-6 text-secondary-500">
-        We're looking for a mid-level product designer to join our team.
+        {order.total}
         <p>
           {order.items.map((item) => (
             <div key={item.id}>

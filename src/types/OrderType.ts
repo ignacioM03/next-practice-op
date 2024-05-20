@@ -11,4 +11,7 @@ export interface OrderType {
   status?: string;
   date?: Date;
   user: UserType;
+  shippingId?: string;
+  shippingCompany?: string;
+  dispatchId?: string;
 }

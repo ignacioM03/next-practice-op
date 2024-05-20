@@ -19,7 +19,7 @@ export default function OrdersPage() {
         <div className="flex flex-wrap w-full mb-20">
           <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">
-              Pitchfork Kickstarter Taxidermy
+              Resumen de mis pedidos
             </h1>
             <div className="h-1 w-20 bg-indigo-500 rounded"></div>
           </div>
@@ -30,7 +30,7 @@ export default function OrdersPage() {
             food truck ugh squid celiac humblebrag.
           </p>
         </div>
-        *{" "}
+        Pedido w{" "}
         <div className="flex flex-wrap -m-4">
           {filterOrders.map((order) => (
             //<OrderCheckCard key={order.id} order={order} />

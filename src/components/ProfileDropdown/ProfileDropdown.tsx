@@ -38,10 +38,10 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             <p className="font-bold">{user!.username}</p>
           </DropdownItem>
           <DropdownItem key="settings">Mi configuración</DropdownItem>
-          <DropdownItem key="team_settings">
+          <DropdownItem key="cart">
             <Link href={"/products/cart"}>Cesta</Link>
           </DropdownItem>
-          <DropdownItem key="team_settings">
+          <DropdownItem key="orders">
             <Link href={"/orders/"}>Mis pedidos</Link>
           </DropdownItem>
           <DropdownItem key="logout" color="danger" onClick={logout}>

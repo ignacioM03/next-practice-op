@@ -1,7 +1,4 @@
-import { useOrderStore } from "@/store/OrderStore";
-
 export default function OrdersPage() {
-  const orders = useOrderStore((state) => state.orders);
   return (
     <div className="container mx-auto bg-gray-50 my-1 mt-10 mb-10">
       <div className="bg-gray-50 text-[#333] w-full rounded font-[sans-serif] overflow-hidden">
