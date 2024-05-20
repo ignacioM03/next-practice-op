@@ -2,6 +2,7 @@
     "orders": [
         {
             "id": "1716078463219",
+            "status":"cancelled",
             "user": {
                 "id": 2,
                 "name": "Ervin Howell",

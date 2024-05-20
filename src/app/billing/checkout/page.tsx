@@ -38,6 +38,8 @@ export default function CheckoutPage() {
       user: user!,
       items: items,
       total: totalOrder,
+      status: "pending",
+      createdAt: new Date(),
     });
   };
 

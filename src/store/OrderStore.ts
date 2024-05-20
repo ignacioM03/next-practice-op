@@ -23,7 +23,12 @@ export const useOrderStore = create<State>((set) => ({
       .orders.find((order: OrderType) => order.id === id);
   },
   removeOrder: (id: string) => set((state) => ({ orders: state.orders })),
-  updateOrder: (order: OrderType) => set((state) => ({ orders: state.orders })),
+  updateOrder: (order: OrderType) =>
+    set((state) => ({
+      orders: state.orders.map((o: OrderType) =>
+        o.id === order.id ? order : o
+      ),
+    })),
   totalOrders: 0,
   totalAmount: 0,
   //totalItems: () => useOrderStore.getState().orders.length,

@@ -14,4 +14,5 @@ export interface OrderType {
   shippingId?: string;
   shippingCompany?: string;
   dispatchId?: string;
+  createdAt?: Date;
 }
