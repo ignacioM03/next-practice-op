@@ -32,7 +32,7 @@ export default function OrdersPage() {
         </div>
         Pedido w{" "}
         <div className="flex flex-wrap -m-4">
-          {filterOrders.map((order) => (
+           {filterOrders.map((order) => (
             //<OrderCheckCard key={order.id} order={order} />
             <OrderAccordion key={order.id} />
           ))}

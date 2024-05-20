@@ -1,6 +1,7 @@
 "use client";
 
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
+import { useFavItems } from "@/context/FavItems";
 import { useAuth } from "@/context/UseAuth";
 import { useCartStore } from "@/store/CartStore";
 import { useOrderStore } from "@/store/OrderStore";
@@ -15,14 +16,21 @@ export default function CheckoutPage() {
   const [hidden, setHidden] = useState(true);
   const addOrder = useOrderStore((state) => state.addOrder);
   const items = useCartStore((state) => state.items);
+  const favItems = useFavItems().state.items;
   const clearCart = useCartStore((state) => state.clearCart);
   const router = useRouter();
 
-  const totalOrder = items.reduce(
-    (total: number, item: Product) =>
-      total + parseFloat((item.price * item.quantity!).toString()),
-    0
-  );
+  const totalOrder = items.length
+    ? items.reduce(
+        (total: number, item: Product) =>
+          total + parseFloat((item.price * item.quantity!).toString()),
+        0
+      )
+    : favItems.reduce(
+        (total: number, item: Product) =>
+          total + parseFloat((item.price * item.quantity!).toString()),
+        0
+      );
 
   const handleCreateOrder = () => {
     addOrder({
@@ -52,7 +60,7 @@ export default function CheckoutPage() {
       <div className="max-w-4xl mx-auto" hidden={!hidden}>
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-[#333] inline-block border-b-4 border-[#333] pb-1">
-            Verificar Page
+            Verificar Pago
           </h2>
         </div>
         <div className="mt-12">

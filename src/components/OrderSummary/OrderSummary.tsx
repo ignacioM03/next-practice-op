@@ -4,6 +4,7 @@ import { OrderCard } from "../OrderCard/OrderCard";
 import { useOrderStore } from "@/store/OrderStore";
 import { useAuth } from "@/context/UseAuth";
 import Link from "next/link";
+import { useFavItems } from "@/context/FavItems";
 
 type OrderProps = {};
 
@@ -13,6 +14,7 @@ export const OrderSummary = () => {
   // const myOrder = orders.filter((order) => order.user.email === user?.email)[
   //   orders.length - 1
   // ];
+  const favItems = useFavItems().state.items;
   const myOrder = orders[orders.length - 1];
   return (
     <section className="py-24 relative">
@@ -47,9 +49,13 @@ export const OrderSummary = () => {
             </Link>
           </div>
           <div className="w-full px-3 min-[400px]:px-6">
-            {myOrder.items.map((item) => (
-              <OrderCard order={item} key={item.id} />
-            ))}
+            {myOrder.items.length
+              ? myOrder.items.map((item) => (
+                  <OrderCard order={item} key={item.id} />
+                ))
+              : favItems.map((item) => (
+                  <OrderCard order={item} key={item.id} />
+                ))}
           </div>
           <div className="w-full border-t border-gray-200 px-6 flex flex-col lg:flex-row items-center justify-between ">
             <div className="flex flex-col sm:flex-row items-center max-lg:border-b border-gray-200">
