@@ -40,12 +40,18 @@ export const OrderTr = ({
       </td>
       <td className="px-6 py-4 text-sm">{order.id}</td>
       <td className="px-6 py-4 text-sm">
-        <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
-          {order.status ? order.status : "Send"}
-        </span>
+        {order.status === "approved" ? (
+          <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
+            {order.status}
+          </span>
+        ) : (
+          <span className="w-[68px] block text-center py-0.5 border-2 border-red-500 text-red-500 font-semibold rounded text-xs">
+            {order.status}
+          </span>
+        )}
       </td>
-      <td className="px-6 py-4 text-sm">{order.status}</td>
-      <td className="px-6 py-4 text-sm">{order.total}</td>
+      <td className="px-6 py-4 text-sm">${order.total}</td>
+      <td className="px-6 py-4 text-sm">{order.shippingId}</td>
       <td className="px-6 py-4 text-sm">
         <div className="flex items-center cursor-pointer">
           <Image

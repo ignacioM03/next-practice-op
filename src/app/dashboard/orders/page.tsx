@@ -5,8 +5,6 @@ export default function OrdersPage() {
   const updateOrder = useOrderStore((state) => state.updateOrder);
 
   const handleUpdateOrder = (order: any) => {
-    console.log("object");
-    console.log(order);
     updateOrder(order);
   };
 
@@ -105,7 +103,11 @@ export default function OrdersPage() {
                     <button
                       className="text-success-700"
                       onClick={() =>
-                        handleUpdateOrder({ ...order, status: "approved" })
+                        handleUpdateOrder({
+                          ...order,
+                          status: "approved",
+                          shippingId: Date.now().toString(),
+                        })
                       }
                     >
                       Despachar

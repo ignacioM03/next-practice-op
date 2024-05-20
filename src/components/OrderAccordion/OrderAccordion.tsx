@@ -13,7 +13,7 @@ export const OrderAccordion = () => {
 
   return (
     <div className="xl:w-1/4 md:w-1/2 p-4">
-      <div className="space-y-6flex flex-wrap -m-4">
+      <div className="space-y-6flex flex flex-wrap -m-4">
         {filterOrders.map((order) => (
           <OrderAccordionItem key={order.id} order={order} />
         ))}

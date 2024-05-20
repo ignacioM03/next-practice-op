@@ -15,8 +15,8 @@ export const OrderTable = ({
 }: OrderTableProps) => {
   const orders = useOrderStore((state) => state.orders);
   return (
-    <div className="overflow-x-auto" >
-      <table className="min-w-full bg-white font-[sans-serif]" >
+    <div className="overflow-x-auto">
+      <table className="min-w-full bg-white font-[sans-serif]">
         <thead className="whitespace-nowrap" hidden={!hidden}>
           <tr>
             <th className="pl-6 w-8">
@@ -68,13 +68,13 @@ export const OrderTable = ({
               </svg>
             </th>
             <th className="px-6 py-4 text-left text-sm font-semibold text-black">
-              SKU
+              #ID envio
             </th>
             <th className="px-6 py-4 text-left text-sm font-semibold text-black">
               Comprador
             </th>
             <th className="px-6 py-4 text-left text-sm font-semibold text-black">
-              Total items
+              Total productos
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"

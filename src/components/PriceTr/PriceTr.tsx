@@ -47,10 +47,10 @@ export const PriceTr = ({ item }: PriceProps) => {
         ${item.price}
       </td>
       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-        {item.createdAt?.toDateString()}
+        {item.createdAt ? item.createdAt?.toDateString() : "N/A"}
       </td>
       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
-        {item.updatedAt?.toDateString()}
+        {item.updatedAt ? item.updatedAt?.toDateString() : "N/A"}
       </td>
       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
         {item.updatedBy}
