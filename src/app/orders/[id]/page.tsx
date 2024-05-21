@@ -14,7 +14,7 @@ export default function OrderCheckPage() {
           Orden #{order!.id}
         </h1>
         <p className="text-base dark:text-gray-300 font-medium leading-6 text-gray-600 flex mx-4">
-          {order!.createdAt?.toLocaleDateString()} ||   
+          {order!.createdAt?.toLocaleDateString()} ||
           {order!.status === "approved" ? (
             <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
               {order!.status}
@@ -47,26 +47,26 @@ export default function OrderCheckPage() {
                     Subtotal
                   </p>
                   <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
-                    $56.00
+                    $00.00
                   </p>
                 </div>
                 <div className="flex justify-between items-center w-full">
                   <p className="text-base dark:text-white leading-4 text-gray-800">
-                    Discount{" "}
+                    Descuento{" "}
                     <span className="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800">
-                      STUDENT
+                      ESTUDIANTE
                     </span>
                   </p>
                   <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
-                    -$28.00 (50%)
+                    $0.00 (0%)
                   </p>
                 </div>
                 <div className="flex justify-between items-center w-full">
                   <p className="text-base dark:text-white leading-4 text-gray-800">
-                    Shipping
+                    Envio
                   </p>
                   <p className="text-base dark:text-gray-300 leading-4 text-gray-600">
-                    $8.00
+                    $0.00
                   </p>
                 </div>
               </div>
@@ -94,21 +94,17 @@ export default function OrderCheckPage() {
                   </div>
                   <div className="flex flex-col justify-start items-center">
                     <p className="text-lg leading-6 dark:text-white font-semibold text-gray-800">
-                      DPD Delivery
+                      Codigo de envio
                       <br />
-                      <span className="font-normal">
-                        Delivery with 24 Hours
-                      </span>
+                      <span className="font-normal">#{order?.shippingId}</span>
                     </p>
                   </div>
                 </div>
-                <p className="text-lg font-semibold leading-6 dark:text-white text-gray-800">
-                  $8.00
-                </p>
+                <p className="text-lg font-semibold leading-6 dark:text-white text-gray-800"></p>
               </div>
               <div className="w-full flex justify-center items-center">
                 <button className="hover:bg-black dark:bg-white dark:text-gray-800 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-5 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white">
-                  View Carrier Details
+                  Ver detalles del operador
                 </button>
               </div>
             </div>

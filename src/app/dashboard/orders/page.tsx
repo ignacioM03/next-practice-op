@@ -22,9 +22,10 @@ export default function OrdersPage() {
             </p>
             <button
               type="button"
-              className="px-6 py-3 mt-10 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-blue-600 hover:bg-blue-700"
+              className="px-6 py-3 mt-10 rounded text-white text-sm tracking-wider font-semibold border-none outline-none bg-teal-600 hover:bg-teal-700"
+              disabled
             >
-              Get the Free Guide
+              Agregar Productos
             </button>
           </div>
           <img
@@ -54,6 +55,7 @@ export default function OrdersPage() {
                   scope="col"
                   className="px-6 py-4 font-medium text-gray-900"
                 ></th>
+                
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 border-t border-gray-100">

@@ -31,29 +31,34 @@ export const OrderItem = ({ item }: OrderItemProps) => {
           </h3>
           <div className="flex justify-start items-start flex-col space-y-2">
             <p className="text-sm dark:text-white leading-none text-gray-800">
-              <span className="dark:text-gray-400 text-gray-300">Style: </span>{" "}
-              Italic Minimal Design
+              <span className="dark:text-gray-400 text-gray-300">
+                Categoria:{" "}
+              </span>{" "}
+              {item.category}
             </p>
             <p className="text-sm dark:text-white leading-none text-gray-800">
-              <span className="dark:text-gray-400 text-gray-300">Size: </span>{" "}
-              Small
+              <span className="dark:text-gray-400 text-gray-300">Desc: </span>{" "}
+              {item.description}
             </p>
             <p className="text-sm dark:text-white leading-none text-gray-800">
-              <span className="dark:text-gray-400 text-gray-300">Color: </span>{" "}
-              Light Blue
+              <span className="dark:text-gray-400 text-gray-300">Rating: </span>{" "}
+              {item.rating}
             </p>
           </div>
         </div>
         <div className="flex justify-between space-x-8 items-start w-full">
           <p className="text-base dark:text-white xl:text-lg leading-6">
             ${item.price}{" "}
-            <span className="text-red-300 line-through"> $45.00</span>
+            <span className="text-red-300 line-through">
+              {" "}
+              ${item.discountPercentage}
+            </span>
           </p>
           <p className="text-base dark:text-white xl:text-lg leading-6 text-gray-800">
             {item.quantity}
           </p>
           <p className="text-base dark:text-white xl:text-lg font-semibold leading-6 text-gray-800">
-            $36.00
+            ${item.price * item.quantity!}
           </p>
         </div>
       </div>
