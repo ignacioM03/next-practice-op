@@ -9,7 +9,7 @@ type OrderCheckCardProps = {
 
 export const OrderAccordionItem = ({ order }: OrderCheckCardProps) => {
   return (
-    <details className="flex flex-wrap -m-4">
+    <details className="flex flex-wrap -m-4 mx-3">
       <summary className="flex cursor-pointer list-none items-center justify-between p-6 text-lg font-medium text-secondary-900">
         #{order.id}
         <div className="text-secondary-500">
@@ -29,7 +29,7 @@ export const OrderAccordionItem = ({ order }: OrderCheckCardProps) => {
           </svg>
         </div>
       </summary>
-      <div className="px-6 pb-6 text-secondary-500">
+      <div className=" text-secondary-500">
         {/* {order.total} */}
         <p>
           {/* {order.items.map((item) => (
