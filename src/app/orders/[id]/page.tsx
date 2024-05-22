@@ -19,6 +19,10 @@ export default function OrderCheckPage() {
             <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
               {order!.status}
             </span>
+          ) : order!.status === "pending" ? (
+            <span className="w-[68px] block text-center py-0.5 border-2 border-yellow-500 text-yellow-500 font-semibold rounded text-xs">
+              {order!.status}
+            </span>
           ) : (
             <span className="w-[68px] block text-center py-0.5 border-2 border-red-500 text-red-500 font-semibold rounded text-xs">
               {order!.status}

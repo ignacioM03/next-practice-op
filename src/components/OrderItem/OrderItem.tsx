@@ -18,7 +18,7 @@ export const OrderItem = ({ item }: OrderItemProps) => {
         />
         <Image
           className="w-full md:hidden"
-          src="https://i.ibb.co/L039qbN/Rectangle-10.png"
+          src={item.image}
           alt="dress"
           width={400}
           height={400}

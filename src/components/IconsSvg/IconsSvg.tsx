@@ -35,7 +35,7 @@ export const FavoriteIconSvg = ({ favorites }: FavItemsProps) => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20px"
-        className="cursor-pointer fill-[#333] hover:fill-[#007bff] inline-block"
+        className="cursor-pointer fill-[#333] hover:fill-[#0d9488] inline-block"
         viewBox="0 0 64 64"
       >
         <path
@@ -62,7 +62,7 @@ export const CartIconSvg = ({ items }: CartIconProps) => {
           xmlns="http://www.w3.org/2000/svg"
           width="20px"
           height="20px"
-          className="cursor-pointer fill-[#333] hover:fill-[#007bff] inline-block"
+          className="cursor-pointer fill-[#333] hover:fill-[#0d9488] inline-block"
           viewBox="0 0 512 512"
         >
           <path
@@ -86,7 +86,7 @@ export const UserIconSvg = () => {
         width="20px"
         height="20px"
         viewBox="0 0 24 24"
-        className="hover:fill-[#007bff]"
+        className="hover:fill-[#0d9488]"
       >
         <circle cx="10" cy="7" r="6" data-original="#000000" />
         <path
@@ -129,7 +129,7 @@ export const HomeDecorIconSvg = () => {
   return (
     <Link
       href="/products"
-      className="hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block"
+      className="hover:text-[#0d9488] hover:fill-[#0d9488] text-gray-600 font-semibold text-[15px] block"
       onClick={handleClick}
     >
       <svg
@@ -160,7 +160,7 @@ export const ElectronicIconSvg = () => {
   return (
     <Link
       href="/products"
-      className="hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block"
+      className="hover:text-[#0d9488] hover:fill-[#0d9488] text-gray-600 font-semibold text-[15px] block"
       onClick={handleClick}
     >
       <svg
@@ -208,7 +208,7 @@ export const ClothingIconSvg = () => {
     <Link
       href="/products"
       onClick={handleClick}
-      className="hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block"
+      className="hover:text-[#0d9488] hover:fill-[#0d9488] text-gray-600 font-semibold text-[15px] block"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -238,7 +238,7 @@ export const ShoesIconSvg = () => {
     <Link
       href="/products"
       onClick={handleClick}
-      className="hover:text-[#007bff] hover:fill-[#007bff] text-gray-600 font-semibold text-[15px] block"
+      className="hover:text-[#0d9488] hover:fill-[#0d9488] text-gray-600 font-semibold text-[15px] block"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
