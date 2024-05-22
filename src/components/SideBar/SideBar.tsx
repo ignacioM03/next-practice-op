@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import { UserType } from "@/types/UserType";
 import { useRouter } from "next/navigation";
 import {

@@ -42,7 +42,7 @@ export const ProgressBar = ({ loading }: ProgressBarProps) => {
               </div>
             </div>
             <p className="text-center text-gray-600 text-base mt-4">
-              Su solicitud se está cargando, espere
+              Su solicitud se está procesando, espere
             </p>
           </div>
         </div>

@@ -3,10 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { NextUIProvider } from "@nextui-org/react";
-import { AuthProvider } from "@/context/UseAuth";
+import { AuthProvider } from "@/context/authContext";
 import { Footer } from "@/components/Footer/Footer";
-import { FiltersProvider } from "@/context/Filters";
-import { FavContextProvider } from "@/context/FavItems";
+import { FiltersProvider } from "@/context/filtersContext";
+import { FavContextProvider } from "@/context/favItemsContext";
+import { Providers } from "./providers/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,17 +24,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextUIProvider>
-          <AuthProvider>
-            <FiltersProvider>
-              <FavContextProvider>
-                <Navbar />
-                <main className="">{children}</main>
-              </FavContextProvider>
-            </FiltersProvider>
-            <Footer />
-          </AuthProvider>
-        </NextUIProvider>
+        <Providers>
+          <NextUIProvider>
+            <AuthProvider>
+              <FiltersProvider>
+                <FavContextProvider>
+                  <Navbar />
+                  <main className="">{children}</main>
+                </FavContextProvider>
+              </FiltersProvider>
+              <Footer />
+            </AuthProvider>
+          </NextUIProvider>
+        </Providers>
       </body>
     </html>
   );

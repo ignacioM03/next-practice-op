@@ -2,7 +2,7 @@
 import { BlurryDivider } from "@/components/BlurryDivider/BlurryDivider";
 import { Filters } from "@/components/Filter/Filter";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import { useFilters } from "@/hooks/useFilter";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";

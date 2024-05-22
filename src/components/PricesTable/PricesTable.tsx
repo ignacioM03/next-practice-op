@@ -1,6 +1,6 @@
 "use client";
 
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import { useProductStore } from "@/store/Products";
 import { PriceTr } from "../PriceTr/PriceTr";
 import { UploadIconSvg } from "../IconsSvg/IconsSvg";

@@ -15,4 +15,5 @@ export interface OrderType {
   shippingCompany?: string;
   dispatchId?: string;
   createdAt?: Date;
+  tracking?: string;
 }

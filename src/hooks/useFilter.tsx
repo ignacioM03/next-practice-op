@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 import { Product } from "@/types/ProductType.js";
-import { FiltersContext } from "@/context/Filters";
+import { FiltersContext } from "@/context/filtersContext";
 
 export function useFilters() {
   const filtersContext = useContext(FiltersContext);

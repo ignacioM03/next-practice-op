@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import React from "react";
 
 export const Footer = () => {

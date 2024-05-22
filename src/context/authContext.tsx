@@ -47,8 +47,8 @@ export const AuthProvider = ({ children }: Props) => {
           ...data[0],
           role: Role.USER,
         };
-        if(myUser.id === 1){
-          myUser.role = Role.ADMIN
+        if (myUser.id === 1) {
+          myUser.role = Role.ADMIN;
           setUser(myUser);
         }
         setUser(myUser);

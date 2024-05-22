@@ -1,5 +1,5 @@
-import { useFavItems } from "@/context/FavItems";
-import { useAuth } from "@/context/UseAuth";
+import { useFavItems } from "@/context/favItemsContext";
+import { useAuth } from "@/context/authContext";
 import { HandleFavItemAction } from "@/hooks/FavItemReducer";
 import { useCartStore } from "@/store/CartStore";
 import { Product } from "@/types/ProductType";

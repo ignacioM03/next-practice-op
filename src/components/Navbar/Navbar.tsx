@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import { ProfileDropdown } from "../ProfileDropdown/ProfileDropdown";
 import { useProductStore } from "@/store/Products";
@@ -17,7 +17,7 @@ import {
   ShoesIconSvg,
 } from "../IconsSvg/IconsSvg";
 import Image from "next/image";
-import { useFavItems } from "@/context/FavItems";
+import { useFavItems } from "@/context/favItemsContext";
 import { useState } from "react";
 
 export default function Navbar() {

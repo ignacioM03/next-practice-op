@@ -1,7 +1,7 @@
 import React from "react";
 import { OrderAccordionItem } from "../OrderAccordionItem/OrderAccordionItem";
 import { useOrderStore } from "@/store/OrderStore";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 
 export const OrderAccordion = () => {
   const orders = useOrderStore((state) => state.orders);

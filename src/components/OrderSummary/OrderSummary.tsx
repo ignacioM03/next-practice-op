@@ -2,9 +2,9 @@
 import React from "react";
 import { OrderCard } from "../OrderCard/OrderCard";
 import { useOrderStore } from "@/store/OrderStore";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import Link from "next/link";
-import { useFavItems } from "@/context/FavItems";
+import { useFavItems } from "@/context/favItemsContext";
 
 type OrderProps = {};
 

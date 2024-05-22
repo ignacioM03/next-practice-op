@@ -1,6 +1,6 @@
 "use client";
 import { StoreHero } from "@/components/StoreHero/StoreHero";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 
 export default function DashboardPage() {
   const { user } = useAuth();

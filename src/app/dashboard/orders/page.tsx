@@ -55,7 +55,6 @@ export default function OrdersPage() {
                   scope="col"
                   className="px-6 py-4 font-medium text-gray-900"
                 ></th>
-                
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100 border-t border-gray-100">
@@ -79,10 +78,22 @@ export default function OrdersPage() {
                             className="h-3 w-3"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                              clip-rule="evenodd"
+                              clipRule="evenodd"
                             />
+                          </svg>
+                          {order.status}
+                        </span>
+                      ) : order.status === "pending" ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-yellow-50 px-2 py-1 text-xs font-semibold text-yellow-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="h-3 w-3"
+                          >
+                            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11a1 1 0 11-2 0v-2a1 1 0 112 0v2zm-1-4a1 1 0 110-2 1 1 0 010 2z" />
                           </svg>
                           {order.status}
                         </span>

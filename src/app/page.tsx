@@ -1,7 +1,7 @@
 "use client";
 
 import { SideMenu } from "@/components/SideMenu/SideMenu";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 
 export default function Home() {
   const { user } = useAuth();

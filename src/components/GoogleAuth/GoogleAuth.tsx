@@ -1,4 +1,4 @@
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import {
   CredentialResponse,
   GoogleLogin,

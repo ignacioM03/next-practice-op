@@ -1,4 +1,4 @@
-import { useFavItems } from "@/context/FavItems";
+import { useFavItems } from "@/context/favItemsContext";
 import { HandleFavItemAction } from "@/hooks/FavItemReducer";
 import { Product } from "@/types/ProductType";
 import Image from "next/image";

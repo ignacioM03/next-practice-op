@@ -1,8 +1,8 @@
 "use client";
 
 import { ProgressBar } from "@/components/ProgressBar/ProgressBar";
-import { useFavItems } from "@/context/FavItems";
-import { useAuth } from "@/context/UseAuth";
+import { useFavItems } from "@/context/favItemsContext";
+import { useAuth } from "@/context/authContext";
 import { useCartStore } from "@/store/CartStore";
 import { useOrderStore } from "@/store/OrderStore";
 import { Product } from "@/types/ProductType";

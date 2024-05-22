@@ -1,7 +1,7 @@
 "use client";
 
 import { GoogleAuth } from "@/components/GoogleAuth/GoogleAuth";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import { LoginType } from "@/types/LoginType";
 import { Role } from "@/types/Role";
 import Link from "next/link";

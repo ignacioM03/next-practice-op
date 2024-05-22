@@ -90,17 +90,27 @@ export default function OrderCheckPage() {
               <div className="flex justify-between items-start w-full">
                 <div className="flex justify-center items-center space-x-4">
                   <div className="w-8 h-8">
-                    <img
+                    <Image
                       className="w-full h-full"
                       alt="logo"
                       src="https://i.ibb.co/L8KSdNQ/image-3.png"
+                      width={32}
+                      height={32}
                     />
                   </div>
                   <div className="flex flex-col justify-start items-center">
                     <p className="text-lg leading-6 dark:text-white font-semibold text-gray-800">
                       Codigo de envio
                       <br />
-                      <span className="font-normal">#{order?.shippingId}</span>
+                      {order.shippingId ? (
+                        <span className="font-normal">
+                          #{order?.shippingId}{" "}
+                        </span>
+                      ) : (
+                        <span className="w-[68px] block text-center py-0.5 border-2 border-yellow-500 text-yellow-500 font-semibold rounded text-xs">
+                          {order!.status}
+                        </span>
+                      )}
                     </p>
                   </div>
                 </div>
@@ -138,15 +148,19 @@ export default function OrderCheckPage() {
               </div>
 
               <div className="flex justify-center text-gray-800 dark:text-white md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
-                <img
+                <Image
                   className="dark:hidden"
                   src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1.svg"
                   alt="email"
+                  width={24}
+                  height={24}
                 />
-                <img
+                <Image
                   className="hidden dark:block"
                   src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1dark.svg"
                   alt="email"
+                  width={24}
+                  height={24}
                 />
                 <p className="cursor-pointer text-sm leading-5 ">
                   {order?.user.email}

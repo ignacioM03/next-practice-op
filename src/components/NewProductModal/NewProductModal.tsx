@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/context/UseAuth";
+import { useAuth } from "@/context/authContext";
 import { productCategories } from "@/enums/ProductCategory";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";

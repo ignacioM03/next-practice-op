@@ -1,4 +1,4 @@
-import { useFavItems } from "@/context/FavItems";
+import { useFavItems } from "@/context/favItemsContext";
 import React from "react";
 import { FavItemCard } from "../FavItemCard/FavItemCard";
 import { useRouter } from "next/navigation";
