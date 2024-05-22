@@ -17,7 +17,7 @@ export const OrderSummary = () => {
   const favItems = useFavItems().state.items;
   const myOrder = orders[orders.length - 1];
   return (
-    <section className="py-24 relative">
+    <section className="py-24 relative ">
       <div className="w-full max-w-7xl px-4 md:px-5 lg-6 mx-auto">
         <h2 className="font-manrope font-bold text-4xl leading-10 text-black text-center">
           Pago exitoso

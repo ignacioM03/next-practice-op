@@ -6,7 +6,7 @@ type ProgressBarProps = {
 
 export const ProgressBar = ({ loading }: ProgressBarProps) => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="">
       {loading ? (
         <div className="w-full max-w-xl p-4 bg-gray-200 rounded-lg shadow-lg">
           <div className="w-full h-4 bg-gray-300 rounded-full mb-2">
