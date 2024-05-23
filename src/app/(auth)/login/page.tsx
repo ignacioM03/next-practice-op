@@ -4,8 +4,10 @@ import { GoogleAuth } from "@/components/GoogleAuth/GoogleAuth";
 import { useAuth } from "@/context/authContext";
 import { LoginType } from "@/types/LoginType";
 import { Role } from "@/types/Role";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type SignInErrorsType = {
@@ -14,12 +16,13 @@ type SignInErrorsType = {
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<LoginType>({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const { username, password } = data;
@@ -30,9 +33,12 @@ export default function LoginPage() {
       role: Role.ADMIN,
     };
 
-    user.role === Role.ADMIN
-      ? router.push("/")
-      : router.push("/products");
+    user.role === Role.ADMIN ? router.push("/") : router.push("/products");
+  };
+
+  const handleSignInWithGoogle = async () => {
+    signInWithGoogle(true);
+    //signIn();
   };
 
   return (
@@ -140,7 +146,6 @@ export default function LoginPage() {
             >
               Iniciar Sesion
             </button>
-            <GoogleAuth />
             <p className="text-center text-sm text-gray-500">
               No tienes cuenta?
               <Link className="underline" href="/register">
@@ -148,6 +153,7 @@ export default function LoginPage() {
               </Link>
             </p>
           </form>
+          <button onClick={handleSignInWithGoogle} hidden={true}>Google</button>
         </div>
       </div>
     </div>
