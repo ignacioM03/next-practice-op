@@ -42,7 +42,7 @@ export const Filters = () => {
           className="block text-xs font-medium text-gray-700"
         >
           {" "}
-          Sort By{" "}
+          Ordenar por{" "}
         </label>
 
         <select
@@ -50,21 +50,21 @@ export const Filters = () => {
           className="mt-1 rounded border-gray-300 text-sm"
           onChange={handleChangeTitle}
         >
-          <option value={"all"}>Sort By</option>
-          <option value="Title, DESC">Title, DESC</option>
-          <option value="Title, ASC">Title, ASC</option>
-          <option value="Price, DESC">Price, DESC</option>
-          <option value="Price, ASC">Price, ASC</option>
+          <option value={"all"}>Ordenar por</option>
+          <option value="Title, DESC">Título, DESC</option>
+          <option value="Title, ASC">Título, ASC</option>
+          <option value="Price, DESC">Precio, DESC</option>
+          <option value="Price, ASC">Precio, ASC</option>
         </select>
       </div>
 
       <div>
-        <p className="block text-xs font-medium text-gray-700">Filters</p>
+        <p className="block text-xs font-medium text-gray-700">Filtros</p>
 
         <div className="mt-1 space-y-2">
           <details className="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition">
-              <span className="text-sm font-medium"> Availability </span>
+              <span className="text-sm font-medium"> Disponibilidad </span>
 
               <span className="transition group-open:-rotate-180">
                 <svg
@@ -86,14 +86,14 @@ export const Filters = () => {
 
             <div className="border-t border-gray-200 bg-white">
               <header className="flex items-center justify-between p-4">
-                <span className="text-sm text-gray-700"> 0 Selected </span>
+                <span className="text-sm text-gray-700"> 0 Seleccionado </span>
 
                 <button
                   type="button"
                   className="text-sm text-gray-900 underline underline-offset-4"
                   onClick={reset}
                 >
-                  Reset
+                  Reiniciar
                 </button>
               </header>
 
@@ -111,7 +111,7 @@ export const Filters = () => {
 
                     <span className="text-sm font-medium text-gray-700">
                       {" "}
-                      In Stock (5+){" "}
+                      En stock (5+){" "}
                     </span>
                   </label>
                 </li>
@@ -147,7 +147,7 @@ export const Filters = () => {
 
                     <span className="text-sm font-medium text-gray-700">
                       {" "}
-                      Out of Stock (10+){" "}
+                      Agotado (10+){" "}
                     </span>
                   </label>
                 </li>
@@ -157,7 +157,7 @@ export const Filters = () => {
 
           <details className="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition">
-              <span className="text-sm font-medium"> Price </span>
+              <span className="text-sm font-medium"> Precio </span>
 
               <span className="transition group-open:-rotate-180">
                 <svg
@@ -181,7 +181,7 @@ export const Filters = () => {
               <header className="flex items-center justify-between p-4">
                 <span className="text-sm text-gray-700">
                   {" "}
-                  The highest price is $600{" "}
+                  El precio más alto es $600.{" "}
                 </span>
 
                 <button
@@ -189,7 +189,7 @@ export const Filters = () => {
                   className="text-sm text-gray-900 underline underline-offset-4"
                   onClick={reset}
                 >
-                  Reset
+                  Reiniciar
                 </button>
               </header>
 
@@ -231,7 +231,7 @@ export const Filters = () => {
 
           <details className="overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden">
             <summary className="flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition">
-              <span className="text-sm font-medium"> Categories </span>
+              <span className="text-sm font-medium"> Categorías </span>
 
               <span className="transition group-open:-rotate-180">
                 <svg
@@ -255,7 +255,7 @@ export const Filters = () => {
               <header className="flex items-center justify-between p-4">
                 <span className="text-sm text-gray-700">
                   {" "}
-                  {countSelected} Selected{" "}
+                  {countSelected} Seleccionado{" "}
                 </span>
 
                 <button
@@ -263,7 +263,7 @@ export const Filters = () => {
                   className="text-sm text-gray-900 underline underline-offset-4"
                   onClick={reset}
                 >
-                  Reset
+                  Reiniciar
                 </button>
               </header>
 

@@ -5,17 +5,26 @@ import { useCartStore } from "@/store/CartStore";
 import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 type Props = {
   product: Product;
 };
 export const ProductCard = ({ product }: Props) => {
-  const addItem = useCartStore((state) => state.addItem);
   const { dispatch } = useFavItems();
+  const addItem = useCartStore((state) => state.addItem);
+  const items = useCartStore((state) => state.items);
+  const [disabled, setDisabled] = useState(false);
 
   const addFavoriteItem = (item: Product) => {
     dispatch({ type: HandleFavItemAction.ADD_FAV_ITEM, payload: item });
   };
+
+  console.log(product);
+
+  useEffect(() => {
+    setDisabled(items.some((item: Product) => item.id === product.id));
+  }, [items, product.id]);
 
   const { isAuthenticated } = useAuth();
   return (
@@ -46,7 +55,7 @@ export const ProductCard = ({ product }: Props) => {
       </button>
       <Link className="" href={`products/${product.id}`}>
         <Image
-          src={product.image!}
+          src={product.image}
           alt=""
           className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
           width={400}
@@ -69,7 +78,7 @@ export const ProductCard = ({ product }: Props) => {
         <div className="mt-4">
           <button
             className="block w-full rounded bg-teal-600 p-4 text-sm font-medium transition hover:scale-105"
-            disabled={!isAuthenticated}
+            disabled={!isAuthenticated || disabled}
             onClick={() => addItem(product)}
           >
             Add to Cart

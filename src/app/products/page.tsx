@@ -2,30 +2,21 @@
 import { BlurryDivider } from "@/components/BlurryDivider/BlurryDivider";
 import { Filters } from "@/components/Filter/Filter";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
-import { useAuth } from "@/context/authContext";
 import { useFilters } from "@/hooks/useFilter";
 import { useProductStore } from "@/store/Products";
 import { Product } from "@/types/ProductType";
-import { useEffect, useState } from "react";
 
 export default function ProductsPage() {
   const products = useProductStore((state) => state.products);
   const { filteredProducts } = useFilters() ?? {};
-  const [disabled, setDisabled] = useState(false);
+  const filters = filteredProducts(products);
 
-  const filters = filteredProducts!(products);
-
-  useEffect(() => {
-    products.some((product: Product) => product.id === 1)
-      ? setDisabled(true)
-      : setDisabled(false);
-  }, [products]);
   return (
     <section>
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <header>
           <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-            Product Collection
+            Colección de productos
           </h2>
 
           <p className="mt-4 max-w-md text-gray-500">
@@ -36,9 +27,16 @@ export default function ProductsPage() {
         </header>
 
         <div className="mt-8 block lg:hidden">
-          <button className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600">
-            <span className="text-sm font-medium"> Filters & Sorting </span>
-
+          <button
+            className="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
+            onClick={() => {
+              console.log("sasdas");
+            }}
+          >
+            <span className="text-sm font-medium">
+              {" "}
+              Filtros y clasificación{" "}
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
