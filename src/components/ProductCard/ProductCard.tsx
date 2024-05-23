@@ -6,6 +6,7 @@ import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useProductStore } from "@/store/Products";
 
 type Props = {
   product: Product;
@@ -15,12 +16,29 @@ export const ProductCard = ({ product }: Props) => {
   const addItem = useCartStore((state) => state.addItem);
   const items = useCartStore((state) => state.items);
   const [disabled, setDisabled] = useState(false);
+  const products = useProductStore((state) => state.products);
+  const updateProduct = useProductStore((state) => state.updateProduct);
 
   const addFavoriteItem = (item: Product) => {
     dispatch({ type: HandleFavItemAction.ADD_FAV_ITEM, payload: item });
   };
 
-  console.log(product);
+  const addToCart = (item: Product) => {
+    const itemProduct = products.find(
+      (product: Product) => product.id === item.id
+    );
+    if (item.quantity > 0) {
+      const newItem = { ...item, quantity: 1 };
+      const newItemProduct = {
+        ...itemProduct,
+        quantity: itemProduct.quantity - 1,
+      };
+      updateProduct(newItemProduct);
+      if (itemProduct.quantity >= newItem.quantity) {
+        addItem(newItem);
+      }
+    }
+  };
 
   useEffect(() => {
     setDisabled(items.some((item: Product) => item.id === product.id));
@@ -79,7 +97,7 @@ export const ProductCard = ({ product }: Props) => {
           <button
             className="block w-full rounded bg-teal-600 p-4 text-sm font-medium transition hover:scale-105"
             disabled={!isAuthenticated || disabled}
-            onClick={() => addItem(product)}
+            onClick={() => addToCart(product)}
           >
             Add to Cart
           </button>
