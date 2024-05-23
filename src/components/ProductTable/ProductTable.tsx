@@ -18,7 +18,7 @@ export const ProductTable = () => {
         <thead className="bg-gray-100 whitespace-nowrap">
           <tr>
             <th className="pl-6 w-8">
-              <input id="checkbox" type="checkbox" className="hidden peer" />
+              <input id="checkbox"  type="checkbox" className="hidden peer" />
               <label
                 htmlFor="checkbox"
                 className="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-blue-500 border border-gray-400 rounded overflow-hidden"

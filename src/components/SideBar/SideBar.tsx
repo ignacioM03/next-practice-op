@@ -194,12 +194,12 @@ export const SideBar = ({ setCurrentPage, user }: UserProps) => {
     <nav className="bg-black h-screen fixed top-0 left-0 min-w-[260px] py-6 px-4 font-[sans-serif] flex flex-col overflow-auto">
       <div className="flex flex-wrap flex-col justify-center items-center cursor-pointer">
         <div className="bg-gray-300 w-12 h-12 rounded-full flex items-center justify-center font-bold text-black text-xl">
-          <span>{user!.profilePicture}</span>
+          <span>{user.profilePicture}</span>
         </div>
 
         <div className="text-center mt-4">
-          <p className="text-base text-white">{user!.name}</p>
-          <p className="text-xs text-gray-300 mt-0.5">{user!.email}</p>
+          <p className="text-base text-white">{user.name}</p>
+          <p className="text-xs text-gray-300 mt-0.5">{user.email}</p>
         </div>
       </div>
 

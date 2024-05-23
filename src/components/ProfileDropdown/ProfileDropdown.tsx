@@ -9,6 +9,7 @@ import {
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 type ProfileProps = {
   user: UserType | null;
@@ -17,7 +18,7 @@ type ProfileProps = {
 
 export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
   const router = useRouter();
-  return user!.role === "user" ? (
+  return user.role === "user" ? (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-start">
         <DropdownTrigger>
@@ -28,14 +29,14 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
               src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
             }}
             className="transition-transform"
-            description={user!.username}
-            name={user!.name}
+            description={user.username}
+            name={user.name}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-bold">Registrado como</p>
-            <p className="font-bold">{user!.username}</p>
+            <p className="font-bold">{user.username}</p>
           </DropdownItem>
           <DropdownItem key="settings">Mi configuración</DropdownItem>
           <DropdownItem key="cart">
@@ -44,7 +45,15 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
           <DropdownItem key="orders">
             <Link href={"/orders/"}>Mis pedidos</Link>
           </DropdownItem>
-          <DropdownItem key="logout" color="danger" onClick={logout}>
+          <DropdownItem
+            key="logout"
+            color="danger"
+            onClick={() => {
+              signOut();
+              logout();
+              router.push("/login");
+            }}
+          >
             Log Out
           </DropdownItem>
         </DropdownMenu>
@@ -61,14 +70,14 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
               src: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
             }}
             className="transition-transform"
-            description={user!.username}
-            name={user!.name}
+            description={user.username}
+            name={user.name}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-bold">Registrado como</p>
-            <p className="font-bold">{user!.username}</p>
+            <p className="font-bold">{user.username}</p>
           </DropdownItem>
           <DropdownItem key="settings">Mi configuración</DropdownItem>
           <DropdownItem key="my_products">
@@ -81,6 +90,8 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             key="logout"
             color="danger"
             onClick={() => {
+              console.log("object");
+              signOut();
               logout();
               router.push("/login");
             }}

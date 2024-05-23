@@ -1,8 +1,9 @@
-import { useFavItems } from "@/context/favItemsContext";
+
 import React from "react";
 import { FavItemCard } from "../FavItemCard/FavItemCard";
 import { useRouter } from "next/navigation";
 import { Product } from "@/types/ProductType";
+import { useFavItems } from "@/context/favItemsContext";
 
 export const ShoppingCartModal = () => {
   const router = useRouter();
@@ -10,7 +11,7 @@ export const ShoppingCartModal = () => {
 
   const total = items.reduce(
     (total: number, item: Product) =>
-      total + parseFloat((item.price * item.quantity!).toString()),
+      total + parseFloat((item.price * item.quantity).toString()),
     0
   );
   const myTotal = {
