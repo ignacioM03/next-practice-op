@@ -7,11 +7,11 @@ export interface UserType {
   createdAt?: Date;
   updatedAt?: Date;
   role?: "admin" | "user" | "";
-  profilePicture: string;
-  website: string;
-  phone: string;
-  address: Address;
-  company: Company;
+  profilePicture?: string;
+  website?: string;
+  phone?: string;
+  address?: Address;
+  company?: Company;
 }
 
 interface Address {
