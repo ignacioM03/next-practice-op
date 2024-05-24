@@ -11,7 +11,7 @@ export const ProgressBar = ({ loading }: ProgressBarProps) => {
 
   setTimeout(() => {
     setLoadingPage(false);
-  }, 7000);
+  }, 9000);
   return (
     <div className="">
       {loadingPage ? (

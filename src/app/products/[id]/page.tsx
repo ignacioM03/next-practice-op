@@ -42,7 +42,9 @@ export default function ProductPage() {
         addItem(newItem);
       }
     }
+    setDisabled(false);
   };
+
 
   useEffect(() => {
     setDisabled(items.some((item: Product) => item.id === product.id));

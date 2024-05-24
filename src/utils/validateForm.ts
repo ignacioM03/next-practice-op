@@ -11,29 +11,28 @@ export const LoginValidate = yup.object().shape({
 });
 
 export const CheckoutValidate = yup.object().shape({
-  card: yup.string().trim().required("La tarjeta es requerida"),
-  //.matches(/^[0-9\b]+$/, "La tarjeta es inválida"),
+  cardNumber: yup
+    .string()
+    .trim()
+    .required("La tarjeta es requerida")
+    .matches(/^[0-9\b]+$/, "La tarjeta es inválida"),
+  name: yup.string().trim().required("El nombre es requerido"),
+  expire: yup.string().trim().required("La fecha es requerida"),
+  email: yup
+    .string()
+    .trim()
+    .required("El correo es requerido")
+    .email("El correo es inválido"),
+  address_line1: yup.string().trim().required("La dirección es requerida"),
+  address_zip: yup.string().trim().required("El zip es requerido"),
+  address_city: yup.string().trim().required("La ciudad es requerida"),
   cvc: yup
     .string()
     .trim()
     .required("El cvc es requerido")
     .matches(/^[0-9\b]+$/, "El cvc es inválido")
     .min(3, "El cvc debe tener 3 caracteres"),
-  exp_month: yup
-    .string()
-    .trim()
-    .required("El mes es requerido")
-    .matches(/^[0-9\b]+$/, "El mes es inválido")
-    .min(2, "El mes debe tener 2 caracteres"),
-  exp_year: yup
-    .string()
-    .trim()
-    .required("El año es requerido")
-    .matches(/^[0-9\b]+$/, "El año es inválido")
-    .min(2, "El año debe tener 2 caracteres"),
-  expire: yup.string().trim().required("La fecha es requerida"),
-  //.matches(/^[0-9\b]+$/, "La fecha es inválida")
-  //.min(5, "La fecha debe tener 5 caracteres"),
+  // // paymentMethod: yup.string().trim().required("Seleccione un metodo de pago"),
 });
 
 export const RegisterValidate = yup.object().shape({

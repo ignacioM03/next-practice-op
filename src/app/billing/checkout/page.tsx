@@ -9,6 +9,10 @@ import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { CardType } from "@/services/Models/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { CheckoutValidate } from "@/utils/validateForm";
 
 export default function CheckoutPage() {
   const { user } = useAuth();
@@ -19,39 +23,45 @@ export default function CheckoutPage() {
   const favItems = useFavItems().state.items;
   const clearCart = useCartStore((state) => state.clearCart);
   const router = useRouter();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(CheckoutValidate),
+  });
 
   const totalOrder = items.length
     ? items.reduce(
         (total: number, item: Product) =>
-          total + parseFloat((item.price * item.quantity!).toString()),
+          total + parseFloat((item.price * item.quantity).toString()),
         0
       )
     : favItems.reduce(
         (total: number, item: Product) =>
-          total + parseFloat((item.price * item.quantity!).toString()),
+          total + parseFloat((item.price * item.quantity).toString()),
         0
       );
 
   const handleCreateOrder = () => {
     addOrder({
       id: Date.now().toString(),
-      user: user!,
+      user: user,
       items: items,
       total: totalOrder,
       status: "pending",
       createdAt: new Date(),
     });
   };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log("submit");
+  const onSubmit: SubmitHandler<CardType> = async (data) => {
     handleCreateOrder();
-    clearCart();
     setTimeout(() => {
       setHidden(false);
       setLoading(false);
-    }, 2000);
+      reset();
+      clearCart();
+    }, 3000);
   };
 
   return (
@@ -65,7 +75,7 @@ export default function CheckoutPage() {
             Verificar Pago
           </h2>
         </div>
-        <div className="mt-12">
+        <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
               <h3 className="text-xl font-bold text-[#333]">
@@ -73,34 +83,56 @@ export default function CheckoutPage() {
               </h3>
             </div>
             <div className="md:col-span-2">
-              <form>
+              <div>
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <input
-                    type="text"
-                    placeholder="First name"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.name}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last name"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.username}
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email address"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.email}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Phone number"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.phone}
-                  />
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="First name"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      id="name"
+                      defaultValue={user?.name}
+                      {...register("name", { required: false })}
+                    />
+                    {errors.name && (
+                      <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                        {errors.name.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="Last name"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      defaultValue={user?.username}
+                    />
+                  </div>
+                  <div className="">
+                    <input
+                      type="email"
+                      placeholder="Email address"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      id="email"
+                      defaultValue={user?.email}
+                      {...register("email", { required: false })}
+                    />
+                    {errors.email && (
+                      <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                        {errors.email.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="Phone number"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      defaultValue={user?.phone}
+                    />
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6 mt-12">
@@ -110,34 +142,64 @@ export default function CheckoutPage() {
               </h3>
             </div>
             <div className="md:col-span-2">
-              <form>
+              <div>
                 <div className="grid sm:grid-cols-2 gap-5">
-                  <input
-                    type="text"
-                    placeholder="Street address"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.address.street}
-                  />
-                  <input
-                    type="text"
-                    placeholder="City"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.address.city}
-                  />
-                  <input
-                    type="text"
-                    placeholder="State"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.address.suite}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Zip Code"
-                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                    value={user?.address.zipcode}
-                  />
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="Street address"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      id="address_line1"
+                      {...register("address_line1", { required: false })}
+                      defaultValue={user?.address.street}
+                    />
+                    {errors.address_line1 && (
+                      <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                        {errors.address_zip.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="City"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      id="address_city"
+                      defaultValue={user?.address.city}
+                      {...register("address_city", { required: false })}
+                    />
+                    {errors.address_city && (
+                      <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                        {errors.address_city.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="State"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      id="address_suite"
+                      defaultValue={user?.address.suite}
+                    />
+                  </div>
+                  <div className="">
+                    <input
+                      type="text"
+                      placeholder="Zip Code"
+                      className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                      defaultValue={user?.address.zipcode}
+                      id="address_zip"
+                      {...register("address_zip", { required: false })}
+                    />
+                    {errors.address_zip && (
+                      <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                        {errors.address_zip.message}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6 mt-12">
@@ -151,7 +213,8 @@ export default function CheckoutPage() {
                     type="radio"
                     className="w-5 h-5 cursor-pointer"
                     id="card"
-                    checked
+                    name="card"
+                    defaultChecked
                   />
                   <label
                     htmlFor="card"
@@ -203,21 +266,45 @@ export default function CheckoutPage() {
               <div className="grid sm:grid-cols-4 gap-6 mt-6">
                 <div className="col-span-2">
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Card number"
                     className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                    id="cardNumber"
+                    {...register("cardNumber", { required: false })}
                   />
+                  {errors.cardNumber && (
+                    <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                      {errors.cardNumber.message}
+                    </p>
+                  )}
                 </div>
-                <input
-                  type="number"
-                  placeholder="EXP."
-                  className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                />
-                <input
-                  type="number"
-                  placeholder="CVV"
-                  className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                />
+                <div className="">
+                  <input
+                    type="text"
+                    placeholder="EXP."
+                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                    id="expire"
+                    {...register("expire", { required: false })}
+                  />
+                  {errors.expire && (
+                    <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                      {errors.expire.message}
+                    </p>
+                  )}
+                </div>
+                <div className="">
+                  <input
+                    type="number"
+                    placeholder="CVV"
+                    className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
+                    {...register("cvc", { required: false })}
+                  />
+                  {errors.cvc && (
+                    <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
+                      {errors.cvc.message}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -230,14 +317,13 @@ export default function CheckoutPage() {
               Paga después
             </button>
             <button
-              type="button"
+              type="submit"
               className="px-6 py-3.5 text-sm bg-teal-600 text-white rounded-md hover:bg-teal-700"
-              onClick={handleSubmit}
             >
               Pagar ahora
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
