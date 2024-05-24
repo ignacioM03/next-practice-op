@@ -11,21 +11,21 @@ export default function OrderCheckPage() {
     <div className="py-14 px-4 md:px-6 2xl:px-20 2xl:container 2xl:mx-auto">
       <div className="flex justify-start item-start space-y-2 flex-col">
         <h1 className="text-3xl dark:text-white lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">
-          Orden #{order!.id}
+          Orden #{order.id}
         </h1>
         <p className="text-base dark:text-gray-300 font-medium leading-6 text-gray-600 flex mx-4">
-          {order!.createdAt?.toLocaleDateString()} ||
-          {order!.status === "approved" ? (
+          {order.createdAt?.toLocaleDateString()} ||
+          {order.status === "approved" ? (
             <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
-              {order!.status}
+              {order.status}
             </span>
-          ) : order!.status === "pending" ? (
+          ) : order.status === "pending" ? (
             <span className="w-[68px] block text-center py-0.5 border-2 border-yellow-500 text-yellow-500 font-semibold rounded text-xs">
-              {order!.status}
+              {order.status}
             </span>
           ) : (
             <span className="w-[68px] block text-center py-0.5 border-2 border-red-500 text-red-500 font-semibold rounded text-xs">
-              {order!.status}
+              {order.status}
             </span>
           )}
         </p>
@@ -108,7 +108,7 @@ export default function OrderCheckPage() {
                         </span>
                       ) : (
                         <span className="w-[68px] block text-center py-0.5 border-2 border-yellow-500 text-yellow-500 font-semibold rounded text-xs">
-                          {order!.status}
+                          {order.status}
                         </span>
                       )}
                     </p>

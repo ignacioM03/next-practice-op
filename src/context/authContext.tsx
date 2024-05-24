@@ -3,7 +3,8 @@ import { LoginType } from "@/types/LoginType";
 import { RegisterType } from "@/types/RegisterType";
 import { Role } from "@/types/Role";
 import { UserType } from "@/types/UserType";
-import { createContext, useContext, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type contextAuth = {
   login: (user: LoginType) => void;
@@ -35,6 +36,7 @@ export const AuthProvider = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<string | null>(null);
+  const { data: session } = useSession();
 
   const login = async (user: LoginType) => {
     try {
@@ -77,7 +79,8 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await signOut();
     setUser(null);
     setIsAuthenticated(false);
   };
@@ -97,6 +100,13 @@ export const AuthProvider = ({ children }: Props) => {
       setErrors(error.response.data);
     }
   };
+
+  useEffect(() => {
+    if (session) {
+      setUser({ ...session.user, role: Role.USER });
+      setIsAuthenticated(true);
+    }
+  }, [session]);
 
   const value = {
     login,

@@ -120,7 +120,7 @@ export const OrderAccordionItem = ({ order }: OrderCheckCardProps) => {
                 </svg>
 
                 <h1 className="px-2 text-sm">
-                  {order.user.address.street.toLocaleUpperCase()}
+                  {order.user.address?.street.toLocaleUpperCase()}
                 </h1>
               </div>
 

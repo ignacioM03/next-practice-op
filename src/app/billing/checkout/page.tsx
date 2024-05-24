@@ -61,7 +61,7 @@ export default function CheckoutPage() {
       setLoading(false);
       reset();
       clearCart();
-    }, 3000);
+    }, 1000);
   };
 
   return (
@@ -151,7 +151,7 @@ export default function CheckoutPage() {
                       className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
                       id="address_line1"
                       {...register("address_line1", { required: false })}
-                      defaultValue={user?.address.street}
+                      defaultValue={user?.address?.street}
                     />
                     {errors.address_line1 && (
                       <p className="bg-red-400 p-2 mt-2 text-white-500 text-center rounded-md">
@@ -165,7 +165,7 @@ export default function CheckoutPage() {
                       placeholder="City"
                       className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
                       id="address_city"
-                      defaultValue={user?.address.city}
+                      defaultValue={user?.address?.city}
                       {...register("address_city", { required: false })}
                     />
                     {errors.address_city && (
@@ -180,7 +180,7 @@ export default function CheckoutPage() {
                       placeholder="State"
                       className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
                       id="address_suite"
-                      defaultValue={user?.address.suite}
+                      defaultValue={user?.address?.suite}
                     />
                   </div>
                   <div className="">
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
                       type="text"
                       placeholder="Zip Code"
                       className="px-4 py-3.5 bg-white text-[#333] w-full text-sm border-2 rounded-md focus:border-blue-500 outline-none"
-                      defaultValue={user?.address.zipcode}
+                      defaultValue={user?.address?.zipcode}
                       id="address_zip"
                       {...register("address_zip", { required: false })}
                     />

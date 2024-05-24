@@ -1,13 +1,11 @@
 "use client";
 
-import { GoogleAuth } from "@/components/GoogleAuth/GoogleAuth";
 import { useAuth } from "@/context/authContext";
 import { LoginType } from "@/types/LoginType";
 import { Role } from "@/types/Role";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type SignInErrorsType = {
@@ -16,13 +14,12 @@ type SignInErrorsType = {
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, signInWithGoogle } = useAuth();
+  const { login } = useAuth();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm<LoginType>({});
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const { username, password } = data;
@@ -37,8 +34,7 @@ export default function LoginPage() {
   };
 
   const handleSignInWithGoogle = async () => {
-    signInWithGoogle(true);
-    //signIn();
+    await signIn();
   };
 
   return (
@@ -146,6 +142,14 @@ export default function LoginPage() {
             >
               Iniciar Sesion
             </button>
+            <button
+              type="button"
+              onClick={handleSignInWithGoogle}
+              hidden={false}
+              className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white max-w-sm mx-auto"
+            >
+              Google
+            </button>
             <p className="text-center text-sm text-gray-500">
               No tienes cuenta?
               <Link className="underline" href="/register">
@@ -153,7 +157,6 @@ export default function LoginPage() {
               </Link>
             </p>
           </form>
-          <button onClick={handleSignInWithGoogle} hidden={true}>Google</button>
         </div>
       </div>
     </div>

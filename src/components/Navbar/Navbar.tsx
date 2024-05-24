@@ -2,7 +2,6 @@
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import { ProfileDropdown } from "../ProfileDropdown/ProfileDropdown";
-import { useProductStore } from "@/store/Products";
 import { Role } from "@/types/Role";
 import { useCartStore } from "@/store/CartStore";
 import {
@@ -10,8 +9,6 @@ import {
   DropCategoryIconSvg,
   HomeDecorIconSvg,
   FavoriteIconSvg,
-  SearchIconSvg,
-  UserIconSvg,
   ElectronicIconSvg,
   ClothingIconSvg,
   ShoesIconSvg,

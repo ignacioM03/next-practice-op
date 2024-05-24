@@ -9,7 +9,6 @@ import {
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 
 type ProfileProps = {
   user: UserType | null;
@@ -49,9 +48,8 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             key="logout"
             color="danger"
             onClick={() => {
-              //signOut();
-              logout();
               router.push("/login");
+              logout();
             }}
           >
             Log Out
@@ -90,9 +88,8 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             key="logout"
             color="danger"
             onClick={() => {
-              //signOut();
-              logout();
               router.push("/login");
+              logout();
             }}
           >
             Log Out
