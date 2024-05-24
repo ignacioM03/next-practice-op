@@ -6,6 +6,7 @@ import { Role } from "@/types/Role";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 type SignInErrorsType = {
@@ -20,6 +21,7 @@ export default function LoginPage() {
     register,
     formState: { errors },
   } = useForm<LoginType>({});
+  const [loading, setLoading] = useState(false);
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const { username, password } = data;
@@ -33,8 +35,23 @@ export default function LoginPage() {
     user.role === Role.ADMIN ? router.push("/") : router.push("/products");
   };
 
-  const handleSignInWithGoogle = async () => {
-    await signIn();
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      const res = await signIn("google", {
+        callbackUrl: "http://localhost:3000/",
+        redirect: false,
+      });
+      if (res?.ok) {
+        router.push("/");
+      } else {
+        console.log("Error signing in with Google:", res?.error);
+      }
+    } catch (error) {
+      console.error("Error signing in with Google:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -144,11 +161,11 @@ export default function LoginPage() {
             </button>
             <button
               type="button"
-              onClick={handleSignInWithGoogle}
-              hidden={false}
+              onClick={handleGoogleSignIn}
+              disabled={loading}
               className="block w-full rounded-lg bg-teal-600 px-5 py-3 text-sm font-medium text-white max-w-sm mx-auto"
             >
-              Google
+              {loading ? "Signing in..." : "Sign in with Google"}
             </button>
             <p className="text-center text-sm text-gray-500">
               No tienes cuenta?
