@@ -80,9 +80,10 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const logout = async () => {
-    await signOut();
-    setUser(null);
-    setIsAuthenticated(false);
+    signOut({ redirect: false }).then(() => {
+      setUser(null);
+      setIsAuthenticated(false);
+    });
   };
 
   const signInWithGoogle = async (body: any) => {

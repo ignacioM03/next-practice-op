@@ -48,8 +48,8 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             key="logout"
             color="danger"
             onClick={() => {
-              router.push("/login");
               logout();
+              router.push("/");
             }}
           >
             Log Out
@@ -88,8 +88,8 @@ export const ProfileDropdown = ({ user, logout }: ProfileProps) => {
             key="logout"
             color="danger"
             onClick={() => {
-              router.push("/login");
               logout();
+              router.push("/");
             }}
           >
             Log Out
