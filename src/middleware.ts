@@ -15,21 +15,19 @@ const AUTH_ROUTES = ["/login", "/register"];
 export async function middleware(request: NextRequest): Promise<any> {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get("token");
-  
-  //todo por si se quiere usar con JWT y cookies para validar 
+
+  //todo por si se quiere usar con JWT y cookies para validar
   // if (ADMIN_ROUTES.includes(pathname)) {
   //   if (token === undefined) {
   //     return NextResponse.redirect(new URL("/login", request.url));
   //   }
-
   //   try {
   //     const { payload } = await jose.jwtVerify(
   //       token.value,
   //       new TextEncoder().encode(process.env.JWT_SECRET)
   //     );
-
   //     console.log(payload);
-  //     if(payload.role === "user") {
+  //     if (payload.role === "user") {
   //       return NextResponse.next();
   //     }
   //     return NextResponse.next();
@@ -37,12 +35,7 @@ export async function middleware(request: NextRequest): Promise<any> {
   //     console.log(error);
   //     return NextResponse.redirect(new URL("/login", request.url));
   //   }
-
-  //   // if (AUTH_ROUTES.includes(pathname)) {
-  //   //   return NextResponse.redirect(new URL("/login", request.url));
-  //   // }
   // }
-  //return NextResponse.redirect(new URL("/", request.url));
 
   return NextResponse.next();
 }

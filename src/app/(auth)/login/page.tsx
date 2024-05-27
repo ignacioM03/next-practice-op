@@ -30,7 +30,6 @@ export default function LoginPage() {
       username,
       password,
     });
-    console.log(response);
     const res = await login({ username, password });
     if (res === undefined) return;
     const user = {
