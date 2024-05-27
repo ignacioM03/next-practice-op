@@ -3,7 +3,7 @@ import { BlurryDivider } from "@/components/BlurryDivider/BlurryDivider";
 import { Filters } from "@/components/Filter/Filter";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { useFilters } from "@/hooks/useFilter";
-import { useProductStore } from "@/store/Products";
+import { useProductStore } from "@/store/ProductStore";
 import { Product } from "@/types/ProductType";
 
 export default function ProductsPage() {

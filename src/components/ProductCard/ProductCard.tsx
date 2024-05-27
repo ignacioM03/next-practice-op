@@ -6,7 +6,7 @@ import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useProductStore } from "@/store/Products";
+import { useProductStore } from "@/store/ProductStore";
 
 type Props = {
   product: Product;

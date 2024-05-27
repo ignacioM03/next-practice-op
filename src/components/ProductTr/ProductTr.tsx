@@ -1,5 +1,5 @@
 "use client";
-import { useProductStore } from "@/store/Products";
+import { useProductStore } from "@/store/ProductStore";
 import { Product } from "@/types/ProductType";
 import Image from "next/image";
 import React, { useState } from "react";

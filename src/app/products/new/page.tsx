@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/context/authContext";
-import { useProductStore } from "@/store/Products";
+import { useProductStore } from "@/store/ProductStore";
 import { Product } from "@/types/ProductType";
 
 export default function NewProductPage() {
