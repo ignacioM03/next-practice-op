@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
 
 type SignInErrorsType = {
   message: string;
@@ -25,10 +26,15 @@ export default function LoginPage() {
 
   const onSubmit: SubmitHandler<LoginType> = async (data) => {
     const { username, password } = data;
+    const response = await axios.post("/api/auth/login", {
+      username,
+      password,
+    });
+    console.log(response);
     const res = await login({ username, password });
     if (res === undefined) return;
     const user = {
-      ...(res || {}), // Ensure that res is an object before spreading it
+      ...(res || {}),
       role: Role.ADMIN,
     };
 

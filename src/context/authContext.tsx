@@ -7,7 +7,7 @@ import { signOut, useSession } from "next-auth/react";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type contextAuth = {
-  login: (user: LoginType) => void;
+  login: (user: LoginType) => any;
   signUp: (user: RegisterType) => void;
   logout: () => void;
   user: UserType | null;
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   const logout = async () => {
-    signOut({ redirect: false }).then(() => {
+    await signOut({ redirect: false }).then(() => {
       setUser(null);
       setIsAuthenticated(false);
     });
