@@ -1,22 +1,21 @@
 import { OrderType } from "@/types/OrderType";
-import React from "react";
+import React, { useState } from "react";
 import { StarIconSvg } from "../IconsSvg/IconsSvg";
 import { OrderSummaryCheck } from "../OrderSummaryCheck/OrderSummaryCheck";
 import Image from "next/image";
 
 type OrderTrProps = {
   order: OrderType;
-  handleOrder: () => void;
-  setOpen: any;
-  hidden: boolean;
 };
 
-export const OrderTr = ({
-  hidden,
-  setOpen,
-  handleOrder,
-  order,
-}: OrderTrProps) => {
+export const OrderTr = ({ order }: OrderTrProps) => {
+  const [open, setOpen] = useState(true);
+  const [disabled, setDisabled] = useState(true);
+
+  const handleClick = () => {
+    setOpen(!open);
+    setDisabled(!disabled);
+  };
   return (
     <tr className="odd:bg-blue-50">
       <td className="pl-6 w-8">
@@ -44,6 +43,10 @@ export const OrderTr = ({
           <span className="w-[68px] block text-center py-0.5 border-2 border-green-500 text-green-500 font-semibold rounded text-xs">
             {order.status}
           </span>
+        ) : order.status === "pending" ? (
+          <span className="w-[68px] block text-center py-0.5 border-2 border-yellow-500 text-yellow-500 font-semibold rounded text-xs">
+            {order.status}
+          </span>
         ) : (
           <span className="w-[68px] block text-center py-0.5 border-2 border-red-500 text-red-500 font-semibold rounded text-xs">
             {order.status}
@@ -68,7 +71,7 @@ export const OrderTr = ({
       </td>
       <td className="px-6 py-4">{order.items.length}</td>
       <td className="px-6 py-4">
-        <button onClick={handleOrder}>
+        <button type="button" onClick={handleClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-7 h-7 cursor-pointer fill-gray-400"
@@ -78,8 +81,8 @@ export const OrderTr = ({
             <circle cx="4" cy="12" r="2" data-original="#000000" />
             <circle cx="20" cy="12" r="2" data-original="#000000" />
           </svg>
-          <div className="" hidden={hidden}>
-            <OrderSummaryCheck setOpen={setOpen} order={order} />
+          <div className="" hidden={open}>
+            <OrderSummaryCheck setOpen={handleClick} order={order} />
           </div>
         </button>
       </td>

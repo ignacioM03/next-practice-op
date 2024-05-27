@@ -11,19 +11,21 @@ export const OrderSummaryCheck = ({
   setOpen,
   order,
 }: OrderSummaryCheckProps) => {
+  const handleModalClick = (e: any) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div
-      className="font-[sans-serif] bg-gray-50"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
+    <button
+      className="fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000]   before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]"
+      onClick={handleModalClick}
     >
-      <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
+      <div className="bg-[#fff] grid lg:grid-cols-2 xl:grid-cols-3 gap-4 h-full">
         <div className="bg-[#3f3f3f] lg:h-screen lg:sticky lg:top-0">
           <div className="relative h-full">
             <div className="p-8 lg:overflow-auto lg:h-[calc(100vh-60px)]">
               <h2 className="text-2xl font-bold text-white">
-                Resumen de la Order
+                Resumen de la Orden
               </h2>
               <div className="space-y-6 mt-10">
                 {order.items.map((item) => (
@@ -67,9 +69,7 @@ export const OrderSummaryCheck = ({
           </div>
         </div>
         <div className="xl:col-span-2 h-max rounded-md p-8 sticky top-0">
-          <h2 className="text-2xl font-bold text-[#333]">
-            Complete your order
-          </h2>
+          <h2 className="text-2xl font-bold text-[#333]">Datos del pedido</h2>
           <form className="mt-10">
             <div>
               <h3 className="text-lg font-bold text-[#333] mb-6">
@@ -222,6 +222,7 @@ export const OrderSummaryCheck = ({
                 <button
                   type="button"
                   className="rounded-md px-6 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-[#333]"
+                  onClick={setOpen}
                 >
                   Cancel
                 </button>
@@ -237,6 +238,6 @@ export const OrderSummaryCheck = ({
           </form>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
