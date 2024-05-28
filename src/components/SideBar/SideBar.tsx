@@ -225,11 +225,11 @@ export const SideBar = ({ setCurrentPage, user }: UserProps) => {
             <SchedulesIconSvg />
           </button>
         </li>
-        <li>
+        {/* <li>
           <button onClick={() => handleChangePage("shipping")}>
             <NotificationsIconSvg />
           </button>
-        </li>
+        </li> */}
       </ul>
 
       <hr className="my-8 border-gray-600" />

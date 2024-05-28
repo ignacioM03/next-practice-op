@@ -19,10 +19,9 @@ export const OutletProductCard = ({ product }: OutletProductCardProps) => {
         <div className="p-6">
           <span className="text-sm block text-gray-400 mb-2">
             {product.createdAt
-              ? // ? new Intl.DateTimeFormat("en-US", { dateStyle: "medium" }).format(
-                //     product.createdAt
-                //   )
-                "-"
+              ? new Intl.DateTimeFormat("en-US", {
+                  dateStyle: "medium",
+                }).format(product.createdAt)
               : "-"}
             | {product.category}
           </span>
